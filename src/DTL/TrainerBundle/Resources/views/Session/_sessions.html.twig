@@ -1,0 +1,27 @@
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Activity</th>
+            <th>Route</th>
+            <th>Title</th>
+            <th>Log</th>
+            <th>Time</th>
+            <th>Distance</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for session in sessions %}
+        <tr>
+            <td>{{ session.getDate.format('Y-m-d') }}</td>
+            <td>{{ session.getActivity }}</td>
+            <td>{{ session.getRoute }}</td>
+            <td>{{ session.getTitle}}</td>
+            <td>{{ session.getLog }}</td>
+            <td>{{ session.getTime }}</td>
+            <td>{{ session.getDistance }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    
