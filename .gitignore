@@ -1,0 +1,7 @@
+app/logs/*
+app/cache/*
+web/uploads/*
+web/bundles/*
+vendor/*
+*.cache
+*.swp

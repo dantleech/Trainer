@@ -75,6 +75,10 @@ class Session
      */
     public function getActivity()
     {
+        if ($this->route) {
+            return $this->route->getActivity();
+        }
+
         return $this->activity;
     }
 
@@ -135,6 +139,9 @@ class Session
      */
     public function getTitle()
     {
+        if ($this->route) {
+            return $this->route->getTitle();
+        }
         return $this->title;
     }
 
@@ -176,7 +183,7 @@ class Session
     public function getTime()
     {
         if ($this->route) {
-            if ($route->isMeasuredBy('time')) {
+            if ($this->route->isMeasuredBy('time')) {
                 return $this->route->getTime();
             }
         }
@@ -202,7 +209,7 @@ class Session
     public function getDistance()
     {
         if ($this->route) {
-            if ($route->isMeasuredBy('distance')) {
+            if ($this->route->isMeasuredBy('distance')) {
                 return $this->route->getDistance();
             }
         }

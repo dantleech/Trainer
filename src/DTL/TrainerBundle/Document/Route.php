@@ -2,6 +2,7 @@
 
 namespace DTL\TrainerBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @MongoDB\Document
@@ -15,11 +16,13 @@ class Route
 
     /**
      * @MongoDB\String
+     * @Assert\NotBlank()
      */
     protected $title;
 
     /**
      * @MongoDB\ReferenceOne(targetDocument="DTL\TrainerBundle\Document\Activity")
+     * @Assert\NotBlank()
      */
     protected $activity;
 
@@ -40,12 +43,13 @@ class Route
 
     /**
      * @MongoDB\String
+     * @Assert\NotBlank
      */
     protected $measuredBy = 'time';
 
-    protected $measuredByTypes = array(
-        'time',
-        'distance',
+    protected static $measuredByChoices = array(
+        'time' => 'Time',
+        'distance' => 'Distance',
     );
 
     /**
@@ -123,20 +127,25 @@ class Route
         return $this->measuredBy;
     }
 
+    public function isMeasuredBy($by)
+    {
+        return $this->measuredBy == $by ? true : false;
+    }
+
     public function setMeasuredBy($by)
     {
-        if (!in_array($by, $this->measuredByTypes)) {
+        if (!in_array($by, array_keys(self::$measuredByChoices))) {
             throw new \InvalidArgumentException(sprintf('Measured by must be one of "%s", "%s" given',
-                implode(',', $this->measuredByTypes), $by));
+                implode(',', array_keys(self::$measuredByChoices)), $by));
 
         }
 
         $this->measuredBy = $by;
     }
 
-    public function getMeasuredByTypes()
+    public static function getMeasuredByChoices()
     {
-        return $this->measuredByTypes;
+        return self::$measuredByChoices;
     }
 
     public function setTime($time)
@@ -167,5 +176,10 @@ class Route
     public function getActivity()
     {
         return $this->activity;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->title;
     }
 }

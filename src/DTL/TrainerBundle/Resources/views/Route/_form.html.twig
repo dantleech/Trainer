@@ -1,0 +1,22 @@
+<form action="#" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+    <table>
+    {{ form_rest(form) }}
+    </table>
+    <button type="submit" class="positive">{% trans %}Save{% endtrans %}</button>
+    <a href="{{ path("sessions") }}" class="button negative">{% trans %}Cancel{% endtrans %}</a>
+</form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#route_measuredBy').change(function() {
+            if (this.value == 'distance') {
+                $('#route_time').attr('disabled', true);
+                $('#route_distance').attr('disabled', false);
+            }
+            if (this.value == 'time') {
+                $('#route_distance').attr('disabled', true);
+                $('#route_time').attr('disabled', false);
+            }
+        });
+    });
+</script>

@@ -1,3 +1,27 @@
-#homepage:
-#    pattern:  /
-#    defaults: { _controller: DTLTrainerBundle:Default:index }
+homepage:
+    pattern: /
+    defaults: { _controller: DTLTrainerBundle:Session:index }
+
+session_new:
+    pattern: /session/new
+    defaults: { _controller: DTLTrainerBundle:Session:new }
+
+sessions:
+    pattern: /sessions
+    defaults: { _controller: DTLTrainerBundle:Session:index }
+
+session_edit:
+    pattern: /session/{session_id}/edit
+    defaults: { _controller: DTLTrainerBundle:Session:edit }
+
+routes:
+    pattern: /routes
+    defaults: { _controller: DTLTrainerBundle:Route:index }
+
+route_new:
+    pattern: /route/new
+    defaults: { _controller: DTLTrainerBundle:Route:new }
+
+route_edit:
+    pattern: /route/{route_id}/edit
+    defaults: { _controller: DTLTrainerBundle:Route:edit }

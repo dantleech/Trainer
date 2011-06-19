@@ -1,0 +1,8 @@
+<form action="#" method="post" {{ form_enctype(form) }}>
+    <table>
+    {{ form_rest(form) }}
+    </table>
+    <button type="submit" class="positive">{% trans %}Save{% endtrans %}</button>
+    <a href="{{ path("sessions") }}" class="button negative">{% trans %}Cancel{% endtrans %}</a>
+
+</form>

@@ -11,19 +11,52 @@
 
 namespace DTL\TrainerBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use DTL\TrainerBundle\Document\Session;
+use DTL\TrainerBundle\Form\SessionType;
+use DTL\TrainerBundle\Controller\Controller;
 
 class SessionController extends Controller
 {
+    protected function getSession()
+    {
+        return $this->getDocumentFromRequest('DTLTrainerBundle:Session', 'session_id');
+    }
+
     public function indexAction()
     {
         $sessions = $this->get('doctrine.odm.mongodb.document_manager')
-            ->createQuery("SELECT s FROM DTLTrainerBundle:Session s ORDER BY s.date DESC")
-            ->getResult();
+            ->createQueryBuilder('DTLTrainerBundle:Session')
+            ->sort('date', 'desc')
+            ->getQuery()
+            ->execute();
 
         return $this->render('DTLTrainerBundle:Session:index.html.twig', array(
             'sessions' => $sessions
         ));
     }
-}
 
+    public function newAction()
+    {
+        $session = new Session();
+        $form = $this->createForm(new SessionType(), $session);
+
+        return $this->render('DTLTrainerBundle:Session:new.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    public function editAction()
+    {
+        $session = $this->getSession();
+        $form = $this->createForm(new SessionType(), $session);
+
+        if ($this->processForm($form)) {
+            $this->notifySuccess('Session Updated');
+            $this->redirect($this->generateUrl('session_edit', array('session_id' => $session->getId())));
+        }
+
+        return $this->render('DTLTrainerBundle:Session:new.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+}

@@ -1,0 +1,27 @@
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Activity</th>
+            <th>Title</th>
+            <th>Distance / Time</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for route in routes %}
+        <tr>
+            <td><img src="{{ asset('bundles/dtltrainer/icons/%icon%.png'|replace({'%icon%': route.getActivity.getIcon})) }}"/></td>
+            <td>{{ route.getActivity }}</td>
+            <td><a href="{{ path('route_edit', {'route_id': route.getId}) }}">{{ route.getTitle }}</a></td>
+            <td>
+                {% if route.isMeasuredBy('time') %}
+                    {{ route.getTime }}
+                {% elseif route.isMeasuredBy('distance') %}
+                    {{ route.getDistance }}
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    

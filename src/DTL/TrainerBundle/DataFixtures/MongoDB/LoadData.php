@@ -66,6 +66,14 @@ class LoadData implements FixtureInterface
         $sess3->setDate(new \DateTime());
         $manager->persist($sess3);
 
+        $sess4 = new Session();
+        $sess4->setActivity($run);
+        $sess4->setTime(1200);
+        $sess4->setDistance(1000);
+        $sess4->setLog('Climbing Mnt Blanc');
+        $sess4->setDate(new \DateTime());
+        $manager->persist($sess4);
+
         $manager->flush();
     }
 }

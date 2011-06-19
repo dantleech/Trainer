@@ -3,8 +3,7 @@
         <tr>
             <th>Date</th>
             <th>Activity</th>
-            <th>Route</th>
-            <th>Title</th>
+            <th>Title / Route</th>
             <th>Log</th>
             <th>Time</th>
             <th>Distance</th>
@@ -15,8 +14,7 @@
         <tr>
             <td>{{ session.getDate.format('Y-m-d') }}</td>
             <td>{{ session.getActivity }}</td>
-            <td>{{ session.getRoute }}</td>
-            <td>{{ session.getTitle}}</td>
+            <td><a href="{{ path("session_edit", {'session_id': session.getId}) }}">{{ session.getTitle }}</a></td>
             <td>{{ session.getLog }}</td>
             <td>{{ session.getTime }}</td>
             <td>{{ session.getDistance }}</td>

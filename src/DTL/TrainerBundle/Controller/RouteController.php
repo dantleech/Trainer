@@ -11,18 +11,57 @@
 
 namespace DTL\TrainerBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use DTL\TrainerBundle\Controller\Controller;
+use DTL\TrainerBundle\Document\Route;
+use DTL\TrainerBundle\Form\RouteType;
 
 class RouteController extends Controller
 {
+    protected function getRoute()
+    {
+        return $this->getDocumentFromRequest('DTLTrainerBundle:Route', 'route_id');
+    }
+
     public function indexAction()
     {
-        $routes = $this->getDoctrine()
-            ->createQuery("SELECT r FROM DTLTrainerBundle:Route r ORDER BY r.title ASC")
-            ->getResult();
+        $routes = $this->getDm()
+            ->createQueryBuilder('DTLTrainerBundle:Route')
+            ->sort('title', 'asc')
+            ->getQuery()
+            ->execute();
 
         return $this->render('DTLTrainerBundle:Route:index.html.twig', array(
             'routes' => $routes
+        ));
+    }
+
+    public function newAction()
+    {
+        $route = new Route();
+        $form = $this->createForm(new RouteType(), $route);
+
+        if ($this->processForm($form)) {
+            $this->notifySuccess('Route Added');
+            $this->redirect($this->generateUrl('route_new'));
+        }
+
+        return $this->render('DTLTrainerBundle:Route:new.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    public function editAction()
+    {
+        $route = $this->getRoute();
+        $form = $this->createForm(new RouteType(), $route);
+
+        if ($this->processForm($form)) {
+            $this->notifySuccess('Route Updated');
+            $this->redirect($this->generateUrl('route_edit', array('route_id' => $route->getId())));
+        }
+
+        return $this->render('DTLTrainerBundle:Route:new.html.twig', array(
+            'form' => $form->createView(),
         ));
     }
 }

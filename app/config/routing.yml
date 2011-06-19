@@ -1,0 +1,2 @@
+trainer:
+    resource: "@DTLTrainerBundle/Resources/config/routing.yml"

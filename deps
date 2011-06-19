@@ -62,3 +62,6 @@
 [DoctrineFixturesBundle]
     git=http://github.com/symfony/DoctrineFixturesBundle.git
     target=/bundles/Symfony/Bundle/DoctrineFixturesBundle
+
+[blueprint]
+    git=http://github.com/joshuaclayton/blueprint-css.git

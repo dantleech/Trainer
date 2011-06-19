@@ -72,4 +72,9 @@ class Activity
     {
         return $this->icon;
     }
+
+    public function __toString()
+    {
+        return (string) $this->title;
+    }
 }
