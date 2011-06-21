@@ -1,22 +1,47 @@
 <form action="#" method="post" {{ form_enctype(form) }}>
     {{ form_errors(form) }}
     <table>
-    {{ form_rest(form) }}
+    {{ form_row(form.activity) }}
+    {{ form_row(form.measuredBy) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.description) }}
+    <tr id="time_distance">
+        <th></th><td></td>
+    </tr>
+    {{ form_row(form._token) }}
     </table>
     <button type="submit" class="positive">{% trans %}Save{% endtrans %}</button>
     <a href="{{ path("sessions") }}" class="button negative">{% trans %}Cancel{% endtrans %}</a>
 </form>
+<table style="display: none">
+    <tr id="distance_row">
+        <td>{{ form_label(form.distance) }}</td>
+        <td>
+            {{ form_errors(form.distance) }}
+            {{ form_widget(form.distance) }}
+        </td>
+    </tr>
+    <tr id="time_row">
+        <td>{{ form_label(form.time) }}</td>
+        <td>
+            {{ form_errors(form.time) }}
+            {{ form_widget(form.time) }}
+        </td>
+    </tr>
+
+</table>
+</table>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#route_measuredBy').change(function() {
             if (this.value == 'distance') {
-                $('#route_time').attr('disabled', true);
-                $('#route_distance').attr('disabled', false);
+                $('#time_distance').empty().append($('#distance_row').clone().children());
             }
             if (this.value == 'time') {
-                $('#route_distance').attr('disabled', true);
-                $('#route_time').attr('disabled', false);
+                $('#time_distance').empty().append($('#time_row').clone().children());
             }
         });
+
+        $('#route_measuredBy').change();
     });
 </script>

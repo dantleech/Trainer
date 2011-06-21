@@ -15,9 +15,9 @@
             <td><a href="{{ path('route_edit', {'route_id': route.getId}) }}">{{ route.getTitle }}</a></td>
             <td>
                 {% if route.isMeasuredBy('time') %}
-                    {{ route.getTime }}
+                    {{ format_seconds(route.getTime) }}
                 {% elseif route.isMeasuredBy('distance') %}
-                    {{ route.getDistance }}
+                    {{ format_meters(route.getDistance) }}
                 {% endif %}
             </td>
         </tr>

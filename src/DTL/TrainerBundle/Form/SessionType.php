@@ -14,7 +14,7 @@ class SessionType extends AbstractType
         $builder->add('route');
         $builder->add('date');
         $builder->add('log');
-        $builder->add('distance');
-        $builder->add('time');
+        $builder->add('distance', 'distance');
+        $builder->add('time', 'stopwatch');
     }
 }

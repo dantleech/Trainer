@@ -16,8 +16,8 @@
             <td>{{ session.getActivity }}</td>
             <td><a href="{{ path("session_edit", {'session_id': session.getId}) }}">{{ session.getTitle }}</a></td>
             <td>{{ session.getLog }}</td>
-            <td>{{ session.getTime }}</td>
-            <td>{{ session.getDistance }}</td>
+            <td>{{ format_seconds(session.getTime, 'stopwatch') }}</td>
+            <td>{{ format_meters(session.getDistance) }}</td>
         </tr>
     {% endfor %}
     </tbody>

@@ -3,6 +3,7 @@
 namespace DTL\TrainerBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
+use DTL\TrainerBundle\Validator\Constraints as TrainerAssert;
 
 /**
  * @MongoDB\Document
@@ -38,6 +39,7 @@ class Route
 
     /**
      * @MongoDB\Int
+     * @TrainerAssert\Stopwatch
      */
     protected $time;
 
