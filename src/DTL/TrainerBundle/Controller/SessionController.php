@@ -38,16 +38,22 @@ class SessionController extends Controller
     public function newAction()
     {
         $session = new Session();
-        $form = $this->createForm(new SessionType(), $session);
-
-        return $this->render('DTLTrainerBundle:Session:new.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        return $this->processPage($session);
     }
 
     public function editAction()
     {
         $session = $this->getSession();
+        return $this->processPage($session);
+    }
+
+    protected function processPage($session)
+    {
+        $routes = $this->get('doctrine.odm.mongodb.document_manager')
+            ->createQueryBuilder('DTLTrainerBundle:Route')
+            ->getQuery()
+            ->toArray();
+
         $form = $this->createForm(new SessionType(), $session);
 
         if ($this->processForm($form)) {
@@ -57,6 +63,7 @@ class SessionController extends Controller
 
         return $this->render('DTLTrainerBundle:Session:new.html.twig', array(
             'form' => $form->createView(),
+            'routes' => $routes,
         ));
     }
 }

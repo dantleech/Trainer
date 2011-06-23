@@ -1,8 +1,102 @@
 <form action="#" method="post" {{ form_enctype(form) }}>
-    <table>
-    {{ form_rest(form) }}
+    <table id="session_form">
+        {{ form_row(form.activity) }}
+        {{ form_row(form.route) }}
+        <tr>
+            <th>{{ form_label(form.title) }}</th>
+            <td id="session_title_td">
+                {{ form_errors(form.title) }}
+                {{ form_widget(form.title) }}
+            </td>
+        </tr>
+        {{ form_row(form.title) }}
+        {{ form_row(form.date) }}
+        <tr id="time_distance">
+            <th></th><td></td>
+        </tr>
+        {{ form_row(form.log) }}
+        {{ form_row(form._token) }}
     </table>
     <button type="submit" class="positive">{% trans %}Save{% endtrans %}</button>
     <a href="{{ path("sessions") }}" class="button negative">{% trans %}Cancel{% endtrans %}</a>
-
 </form>
+
+<table style="display: none">
+    <tr id="distance_row">
+        <td>{{ form_label(form.distance) }}</td>
+        <td>
+            {{ form_errors(form.distance) }}
+            {{ form_widget(form.distance) }}
+        </td>
+    </tr>
+    <tr id="time_row">
+        <td>{{ form_label(form.time) }}</td>
+        <td>
+            {{ form_errors(form.time) }}
+            {{ form_widget(form.time) }}
+        </td>
+    </tr>
+    <tr id="distance_time_row">
+        <td><label>{% trans %}Distance / Time{% endtrans %}</label></td>
+        <td id="distance_time_td">
+            {{ form_errors(form.distance) }}
+            {{ form_errors(form.time) }}
+        </td>
+    </tr>
+</table>
+
+<script type="text/javascript">
+var routes = {
+    {% for route in routes %}
+            "{{ route.getId }}": {
+                'measuredBy': "{{ route.getMeasuredBy }}",
+                'activity': "{{ route.getActivity.getId }}",
+                'title': "{{ route.getTitle }}",
+            },
+    {% endfor %}
+};
+
+$(document).ready(function () {
+    $('#distance_time_td').append($('#session_distance').clone());
+    $('#distance_time_td').append(' / ');
+    $('#distance_time_td').append($('#session_time').clone());
+
+    $('#session_route').change(function() {
+        var route = routes[$(this).val()];
+
+        if (route) {
+            var titleParent = $('#session_title').parent();
+            $('#session_title_td').empty().append('<i>' + route.title + '</i>');
+            if (route.measuredBy == 'distance') {
+                $('#time_distance').empty().append($('#time_row').clone().children());
+            }
+            if (route.measuredBy == 'time') {
+                $('#time_distance').empty().append($('#distance_row').clone().children());
+            }
+        } else {
+            $('#time_distance').empty().append($('#distance_time_row').clone().children());
+        }
+    });
+
+    $('#session_activity').change(function() {
+        var selectedId = $('#session_route').val();
+        $('#session_route').empty();
+        $('#session_route').append('<option value=""> - Free Session - </option>');
+        for (id in routes) {
+            if (routes[id].activity == $(this).val()) {
+                if (selectedId = id) {
+                    var selected = 'SELECTED';
+                } else {
+                    var selected = '';
+                }
+                $('#session_route').append('<option value="' + id + '" ' + selected +'>' + routes[id].title + '</option>');
+            }
+        }
+
+        $('#session_route').change();
+
+    });
+
+    $('#session_activity').change();
+});
+</script>

@@ -10,11 +10,11 @@ class SessionType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder->add('activity');
-        $builder->add('title');
         $builder->add('route');
-        $builder->add('date');
-        $builder->add('log');
+        $builder->add('title');
+        $builder->add('date', 'date');
         $builder->add('distance', 'distance');
         $builder->add('time', 'stopwatch');
+        $builder->add('log', 'textarea');
     }
 }
