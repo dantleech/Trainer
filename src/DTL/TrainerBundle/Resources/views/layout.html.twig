@@ -1,6 +1,7 @@
 {% extends "::base.html.twig" %}
 {% block stylesheets %}
     <script type="text/javascript" src="{{ asset("js/jquery-1.6.1.min.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/jquery.sparkline.min.js") }}"></script>
     <link rel="stylesheet" href="{{ asset("css/blueprint/screen.css") }}" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="{{ asset("css/blueprint/print.css") }}" type="text/css" media="print"> 
     <link rel="stylesheet" href="{{ asset("css/blueprint/plugins/buttons/screen.css") }}" type="text/css" media="screen, projection"> 
@@ -25,6 +26,7 @@
             {% block navigation2 %}
             {% endblock %}
         </div>
+        <hr/>
         {% if app.session.getFlash('success') %}
             <div class="span-24 success">
                 {{ app.session.getFlash('success') }}

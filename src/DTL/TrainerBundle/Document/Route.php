@@ -49,6 +49,12 @@ class Route
      */
     protected $measuredBy = 'time';
 
+    /**
+     * @MongoDB\ReferenceMany(targetDocument="DTL\TrainerBundle\Document\Session", mappedBy="route")
+     */
+    protected $sessions = array();
+
+
     protected static $measuredByChoices = array(
         'time' => 'Time',
         'distance' => 'Distance',
@@ -183,5 +189,51 @@ class Route
     public function __toString()
     {
         return (string) $this->title;
+    }
+
+    public function getSessionCount()
+    {
+        return count($this->sessions);
+    }
+
+    public function getMeasure($session)
+    {
+        if ($this->isMeasuredBy('time')) {
+            return $session->getDistance();
+        } else {
+            return $session->getTime();
+        }
+    }
+
+    public function getBest()
+    {
+        $best = null;
+        foreach ($this->sessions as $session) {
+            $measure = $this->getMeasure($session);
+            if (!$best) {
+                $best = $measure;
+            }
+
+            if ($this->isMeasuredBy('distance')) {
+                if ($measure < $best) {
+                    $best = $measure;
+                }
+            } else {
+                if ($measure > $best) {
+                    $best = $measure;
+                }
+            }
+        }
+
+        return $best;
+    }
+
+    public function getTrend()
+    {
+        $trend = array();
+        foreach ($this->sessions as $session) {
+            $trend[] = $this->getMeasure($session);
+        }
+        return $trend;
     }
 }

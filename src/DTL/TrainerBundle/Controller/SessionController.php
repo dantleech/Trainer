@@ -47,6 +47,15 @@ class SessionController extends Controller
         return $this->processPage($session);
     }
 
+    public function deleteAction()
+    {
+        $session = $this->getSession();
+        $this->getDm()->remove($session);
+        $this->getDm()->flush();
+        $this->notifySuccess('Session Deleted');
+        return $this->redirect($this->generateUrl('sessions'));
+    }
+
     protected function processPage($session)
     {
         $routes = $this->get('doctrine.odm.mongodb.document_manager')
@@ -55,13 +64,16 @@ class SessionController extends Controller
             ->toArray();
 
         $form = $this->createForm(new SessionType(), $session);
+        $message = $session->getId() ? 'Session Updated' : 'Session Created';
+        $template = $session->getId() ? 'edit' : 'new';
 
         if ($this->processForm($form)) {
-            $this->notifySuccess('Session Updated');
+            $this->notifySuccess($message);
             $this->redirect($this->generateUrl('session_edit', array('session_id' => $session->getId())));
         }
 
-        return $this->render('DTLTrainerBundle:Session:new.html.twig', array(
+        return $this->render('DTLTrainerBundle:Session:'.$template.'.html.twig', array(
+            'session' => $session,
             'form' => $form->createView(),
             'routes' => $routes,
         ));

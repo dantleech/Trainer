@@ -14,6 +14,10 @@ session_edit:
     pattern: /session/{session_id}/edit
     defaults: { _controller: DTLTrainerBundle:Session:edit }
 
+session_delete:
+    pattern: /session/{session_id}/delete
+    defaults: { _controller: DTLTrainerBundle:Session:delete }
+
 routes:
     pattern: /routes
     defaults: { _controller: DTLTrainerBundle:Route:index }

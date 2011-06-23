@@ -1,0 +1,15 @@
+body {
+    font-size: 1em;
+}
+
+table.form tr:nth-child(2n) td {
+    background-color: white;
+}
+
+table.form tr td {
+    vertical-align: top;
+}
+
+table.form tr {
+    text-align: right;
+}

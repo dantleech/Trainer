@@ -5,6 +5,9 @@
             <th>Activity</th>
             <th>Title</th>
             <th>Distance / Time</th>
+            <th>Best</th>
+            <th>Sessions</th>
+            <th>Trend</th>
         </tr>
     </thead>
     <tbody>
@@ -20,8 +23,23 @@
                     {{ format_meters(route.getDistance) }}
                 {% endif %}
             </td>
+            <td>
+                {% if route.isMeasuredBy('time') %}
+                    {{ format_meters(route.getBest) }}
+                {% elseif route.isMeasuredBy('distance') %}
+                    {{ format_seconds(route.getBest) }}
+                {% endif %}
+            </td>
+            <td>
+                {{ route.getSessionCount }}
+            </td>
+            <td>
+                <span class="sparkline-{{ route.getId }}"></span>
+                <script type="text/javascript">
+                    $('.sparkline-{{ route.getId }}').sparkline([{{ route.getTrend|join(',') }}], {'width': '50px'});
+                </script>
+            </td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
-    
