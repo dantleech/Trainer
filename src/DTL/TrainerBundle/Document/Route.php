@@ -4,11 +4,12 @@ namespace DTL\TrainerBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 use DTL\TrainerBundle\Validator\Constraints as TrainerAssert;
+use DTL\TrainerBundle\Document\LabelableInterface;
 
 /**
  * @MongoDB\Document
  */
-class Route
+class Route implements LabelableInterface
 {
     /**
      * @MongoDB\Id
@@ -54,6 +55,10 @@ class Route
      */
     protected $sessions = array();
 
+    /**
+     * @MongoDB\Collection
+     */
+    protected $labels = array();
 
     protected static $measuredByChoices = array(
         'time' => 'Time',
@@ -196,7 +201,7 @@ class Route
         return count($this->sessions);
     }
 
-    public function getMeasure($session)
+    public function getSessionMeasure($session)
     {
         if ($this->isMeasuredBy('time')) {
             return $session->getDistance();
@@ -205,11 +210,29 @@ class Route
         }
     }
 
+    public function getMeasure()
+    {
+        if ($this->isMeasuredBy('time')) {
+            return $this->getTime();
+        } else {
+            return $this->getDistance();
+        }
+    }
+
+    public function getRankedBy()
+    {
+        if ($this->isMeasuredBy('time')) {
+            return 'distance';
+        } else {
+            return 'time';
+        }
+    }
+
     public function getBest()
     {
         $best = null;
         foreach ($this->sessions as $session) {
-            $measure = $this->getMeasure($session);
+            $measure = $this->getSessionMeasure($session);
             if (!$best) {
                 $best = $measure;
             }
@@ -232,8 +255,50 @@ class Route
     {
         $trend = array();
         foreach ($this->sessions as $session) {
-            $trend[] = $this->getMeasure($session);
+            $trend[] = $this->getSessionMeasure($session);
         }
         return $trend;
     }
+
+    public function setLabels(array $labels = array())
+    {
+        $this->labels = $labels;
+    }
+
+    public function getLabels()
+    {
+        return $this->labels;
+    }
+
+    public function getSessions()
+    {
+        return $this->sessions;
+    }
+
+    public function getLastSessionDate()
+    {
+        $lastSession = null;
+        foreach ($this->sessions as $session) {
+            if (!$lastSession) {
+                $lastSession = $session->getDate();
+            }
+
+            if ($session->getDate()->format('U') > $lastSession->format('U')) {
+                $lastSession = $session->getDate();
+            }
+        }
+
+        return $lastSession;
+    }
+
+    public function getAverage()
+    {
+        $total = 0;
+        foreach ($this->sessions as $session) {
+            $total += $this->getSessionMeasure($session);
+        }
+
+        return $total / count($this->sessions);
+    }
 }
+

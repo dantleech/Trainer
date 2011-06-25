@@ -1,0 +1,34 @@
+{% for activity in activities %}
+    {% if activity.getId in activeActivities %}
+        {% set class="active" %}
+    {% else %}
+        {% set class="" %}
+    {% endif %}
+    <a href="#" type="activity" rel="{{ activity.getId }}" class="label {{ class }}">{{ activity.title }}</a>
+{% endfor %}
+{% for label in labels %}
+    {% if label._id in activeLabels %}
+        {% set class="active" %}
+    {% else %}
+        {% set class="" %}
+    {% endif %}
+   <a href="#" type="label" rel="{{ label._id }}" class="button {{ class }}" style="margin-top: 0px">{{ label._id }} x {{ label.value }}</a>
+{% endfor %}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.label').each(function() {
+            var el = $(this);
+            $(this).click(function() {
+                $.post('{{ path('filter_update') }}', {
+                    'type': el.attr('type'),
+                    'id': el.attr('rel'),
+                }, function () {
+                    el.toggleClass('active');
+                    window.location.reload(true);
+                });
+                return false;
+            });
+        });
+    });
+</script>

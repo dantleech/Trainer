@@ -13,3 +13,11 @@ table.form tr td {
 table.form tr {
     text-align: right;
 }
+
+.label {
+    
+}
+
+.active {
+    background-color: green;
+}

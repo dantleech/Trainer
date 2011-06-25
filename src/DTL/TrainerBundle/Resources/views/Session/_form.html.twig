@@ -7,9 +7,9 @@
             <td id="session_title_td">
                 {{ form_errors(form.title) }}
                 {{ form_widget(form.title) }}
+                <span id="route_title_span"></span>
             </td>
         </tr>
-        {{ form_row(form.title) }}
         {{ form_row(form.date) }}
         <tr id="time_distance">
             <th></th><td></td>
@@ -63,10 +63,12 @@ $(document).ready(function () {
 
     $('#session_route').change(function() {
         var route = routes[$(this).val()];
+        $('#route_title_span').empty();
 
         if (route) {
             var titleParent = $('#session_title').parent();
-            $('#session_title_td').empty().append('<i>' + route.title + '</i>');
+            $('#session_title').css('display', 'none');
+            $('#route_title_span').append(route.title);
             if (route.measuredBy == 'distance') {
                 $('#time_distance').empty().append($('#time_row').clone().children());
             }
@@ -75,23 +77,22 @@ $(document).ready(function () {
             }
         } else {
             $('#time_distance').empty().append($('#distance_time_row').clone().children());
+            $('#session_title').css('display', 'inline');
         }
     });
 
     $('#session_activity').change(function() {
         var selectedId = $('#session_route').val();
         $('#session_route').empty();
+        
         $('#session_route').append('<option value=""> - Free Session - </option>');
         for (id in routes) {
             if (routes[id].activity == $(this).val()) {
-                if (selectedId = id) {
-                    var selected = 'SELECTED';
-                } else {
-                    var selected = '';
-                }
-                $('#session_route').append('<option value="' + id + '" ' + selected +'>' + routes[id].title + '</option>');
+                $('#session_route').append('<option value="' + id + '">' + routes[id].title + '</option>');
             }
         }
+
+        $('#session_route').val(selectedId);
 
         $('#session_route').change();
 

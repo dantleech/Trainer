@@ -12,7 +12,10 @@
     <tbody>
     {% for session in sessions %}
         <tr>
-            <td>{{ session.getDate.format('Y-m-d') }}</td>
+            <td>
+                {{ session.getDate.format('Y-m-d') }}<br/>
+                {{ time_ago_in_words(session.getDate.format('U')) }}
+            </td>
             <td>{{ session.getActivity }}</td>
             <td><a href="{{ path("session_edit", {'session_id': session.getId}) }}">{{ session.getTitle }}</a></td>
             <td>{{ session.getLog }}</td>

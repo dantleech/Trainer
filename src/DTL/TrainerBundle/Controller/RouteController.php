@@ -47,6 +47,7 @@ class RouteController extends Controller
 
         return $this->render('DTLTrainerBundle:Route:new.html.twig', array(
             'form' => $form->createView(),
+            'route' => $route,
         ));
     }
 
@@ -62,7 +63,14 @@ class RouteController extends Controller
 
         return $this->render('DTLTrainerBundle:Route:new.html.twig', array(
             'form' => $form->createView(),
+            'route' => $route,
         ));
+    }
+
+    public function viewAction()
+    {
+        $route = $this->getRoute();
+        return $this->render('DTLTrainerBundle:Route:view.html.twig', array('route' => $route));
     }
 }
 

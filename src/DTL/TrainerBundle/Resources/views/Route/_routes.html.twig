@@ -1,4 +1,4 @@
-<table>
+<table id="routes">
     <thead>
         <tr>
             <th></th>
@@ -7,6 +7,7 @@
             <th>Distance / Time</th>
             <th>Best</th>
             <th>Sessions</th>
+            <th>Last</th>
             <th>Trend</th>
         </tr>
     </thead>
@@ -15,23 +16,19 @@
         <tr>
             <td><img src="{{ asset('bundles/dtltrainer/icons/%icon%.png'|replace({'%icon%': route.getActivity.getIcon})) }}"/></td>
             <td>{{ route.getActivity }}</td>
-            <td><a href="{{ path('route_edit', {'route_id': route.getId}) }}">{{ route.getTitle }}</a></td>
+            <td><a href="{{ path('route_view', {'route_id': route.getId}) }}">{{ route.getTitle }}</a></td>
             <td>
-                {% if route.isMeasuredBy('time') %}
-                    {{ format_seconds(route.getTime) }}
-                {% elseif route.isMeasuredBy('distance') %}
-                    {{ format_meters(route.getDistance) }}
-                {% endif %}
+                {{ format_measure(route.getMeasure, route.getMeasuredBy) }}
             </td>
             <td>
-                {% if route.isMeasuredBy('time') %}
-                    {{ format_meters(route.getBest) }}
-                {% elseif route.isMeasuredBy('distance') %}
-                    {{ format_seconds(route.getBest) }}
-                {% endif %}
+                {{ format_measure(route.getBest, route.getRankedBy) }}
             </td>
             <td>
                 {{ route.getSessionCount }}
+            </td>
+            <td>
+                {{ route.getLastSessionDate.format('Y-m-d') }}<br/>
+                {{ time_ago_in_words(route.getLastSessionDate.format('U')) }}
             </td>
             <td>
                 <span class="sparkline-{{ route.getId }}"></span>
@@ -43,3 +40,9 @@
     {% endfor %}
     </tbody>
 </table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#routes').tablesorter();
+        });
+</script>

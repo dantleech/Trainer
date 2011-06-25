@@ -1,0 +1,12 @@
+{% extends "DTLTrainerBundle:Route:layout.html.twig" %}
+{% block navigation2 %}
+    {{ parent() }}
+    <a class="button" href="{{ path('route_edit', {'route_id': route.getId}) }}">Edit</a>
+{% endblock %}
+{% block page %}
+<div class="span-12">
+    {% include "DTLTrainerBundle:Route:_sessions.html.twig" with {'sessions': route.getSessions()} %}
+</div>
+
+{% endblock %}
+

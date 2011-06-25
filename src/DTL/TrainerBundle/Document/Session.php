@@ -2,6 +2,8 @@
 
 namespace DTL\TrainerBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use DTL\TrainerBundle\Document\LabelableInterface;
+use DTL\TrainerBundle\Util\MathUtil;
 
 /**
  * @MongoDB\Document
@@ -48,6 +50,11 @@ class Session
      */
     protected $distance;
 
+    /**
+     * @MongoDB\Collection
+     */
+    protected $labels;
+
     public function __construct()
     {
         $this->date = new \DateTime();
@@ -92,7 +99,7 @@ class Session
      *
      * @param DTL\TrainerBundle\Document\Route $route
      */
-    public function setRoute(\DTL\TrainerBundle\Document\Route $route)
+    public function setRoute(\DTL\TrainerBundle\Document\Route $route = null)
     {
         $this->route = $route;
     }
@@ -220,5 +227,27 @@ class Session
         }
 
         return $this->distance;
+    }
+
+    public function setLabels(array $labels = array())
+    {
+        $this->labels = $labels;
+    }
+
+    public function getLabels()
+    {
+        return $this->labels;
+    }
+
+    public function getAveragePace()
+    {
+        $avg = MathUtil::average($this->getTime(), $this->getDistance() / 1000);
+        return $avg;
+    }
+
+    public function getAverageSpeed()
+    {
+        $avg = MathUtil::average($this->getDistance(), $this->getTime() / 3600);
+        return $avg;
     }
 }

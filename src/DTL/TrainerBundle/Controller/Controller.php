@@ -52,4 +52,21 @@ class Controller extends BaseController
         $document = $this->getDm()->find($type, $id);
         return $document;
     }
+
+    public function getActiveFilters($type)
+    {
+        $filters = $this->get('session')->get('filters');
+        return isset($filters[$type]) ? $filters[$type] : array();
+    }
+
+    public function filterToggle($type, $id)
+    {
+        $filters = $this->get('session')->get('filters');
+        if (!isset($filters[$type][$id])) {
+            $filters[$type][$id] = $id;
+        } else {
+            unset($filters[$type][$id]);
+        }
+        $this->get('session')->set('filters', $filters);
+    }
 }

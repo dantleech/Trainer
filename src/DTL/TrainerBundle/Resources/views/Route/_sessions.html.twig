@@ -1,0 +1,38 @@
+<table id="sessions">
+    <thead>
+        <tr>
+        <th>{% trans %}Date{% endtrans %}</th>
+        <th>
+            {{ route.getRankedBy|trans() }}
+        </th>
+        </th>
+        <th>{% trans %}Pace{% endtrans %}</th>
+        <th>{% trans %}Speed{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for session in route.getSessions %}
+        <tr>
+            <td>
+                {{ session.getDate().format('Y-m-d') }}<br/>
+                {{ time_ago_in_words(session.getDate().format('U')) }}
+            </td>
+            <td>
+                {{ format_measure(route.getSessionMeasure(session), route.getRankedBy) }}
+            </td>
+            <td>
+                {{ format_seconds(session.getAveragePace) }}
+            </td>
+            <td>
+                {{ format_meters(session.getAverageSpeed, 'speed') }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sessions').tablesorter();
+        });
+</script>

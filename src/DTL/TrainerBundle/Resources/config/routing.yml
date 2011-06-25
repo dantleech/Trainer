@@ -29,3 +29,11 @@ route_new:
 route_edit:
     pattern: /route/{route_id}/edit
     defaults: { _controller: DTLTrainerBundle:Route:edit }
+
+route_view:
+    pattern: /route/{route_id}
+    defaults: { _controller: DTLTrainerBundle:Route:view }
+
+filter_update:
+    pattern: /filter/update
+    defaults: { _controller: DTLTrainerBundle:Filter:update }

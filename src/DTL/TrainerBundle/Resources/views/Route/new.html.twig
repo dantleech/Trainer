@@ -1,4 +1,10 @@
 {% extends "DTLTrainerBundle:Route:layout.html.twig" %}
+{% block navigation2 %}
+    {{ parent() }}
+    {% if route.getId %}
+        <a class="button" href="{{ path('route_view', {'route_id': route.getId}) }}">View</a>
+    {% endif %}
+{% endblock %}
 {% block page_content %}
     {% include "DTLTrainerBundle:Route:_form.html.twig" %}
 {% endblock %}

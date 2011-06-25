@@ -31,24 +31,28 @@ class LoadData implements FixtureInterface
         $veloHip->setActivity($velo);
         $veloHip->setTime('3600');
         $veloHip->setMeasuredBy('time');
+        $veloHip->setLabels(array('paris'));
         $manager->persist($veloHip);
 
         $runTour = new Route();
         $runTour->setTitle('Arc / Eiffel / Champs / Wagram');
         $runTour->setActivity($run);
         $runTour->setDistance('12500');
+        $runTour->setLabels(array('paris'));
         $manager->persist($runTour);
 
         $swimParm = new Route();
         $swimParm->setTitle('Piscine Parmantier 1km');
         $swimParm->setActivity($swim);
         $swimParm->setDistance('1000');
+        $swimParm->setLabels(array('paris', 'ylly'));
         $manager->persist($swimParm);
 
         $sess1 = new Session();
         $sess1->setRoute($runTour);
         $sess1->setTime(35123);
         $sess1->setLog('This is a test run');
+        $sess1->setLabels(array('paris', 'exploring'));
         $sess1->setDate(new \DateTime());
         $manager->persist($sess1);
 
@@ -57,6 +61,7 @@ class LoadData implements FixtureInterface
         $sess2->setDistance(37000);
         $sess2->setLog('This is a test bike ride');
         $sess2->setDate(new \DateTime());
+        $sess2->setLabels(array('paris', 'rekky'));
         $manager->persist($sess2);
 
         $sess3 = new Session();
