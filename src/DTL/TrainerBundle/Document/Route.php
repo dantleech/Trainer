@@ -201,6 +201,21 @@ class Route implements LabelableInterface
         return count($this->sessions);
     }
 
+    public function getMeasurePlots($milliseconds = false)
+    {
+        $plots = array();
+        foreach ($this->getSessions() as $session) {
+            if ($milliseconds) {
+                $timestamp = $session->getDate()->format('U') * 1000;
+            } else {
+                $timestamp = $session->getDate()->format('U');
+            }
+            $plots[] = array($timestamp, $this->getSessionMeasure($session) / 60);
+        }
+
+        return $plots;
+    }
+
     public function getSessionMeasure($session)
     {
         if ($this->isMeasuredBy('time')) {
@@ -251,11 +266,14 @@ class Route implements LabelableInterface
         return $best;
     }
 
-    public function getTrend()
+    public function getTrendPlots()
     {
         $trend = array();
-        foreach ($this->sessions as $session) {
+        foreach ($this->getSessions() as $i => $session) {
             $trend[] = $this->getSessionMeasure($session);
+            if ($i == 10) {
+                break;
+            }
         }
         return $trend;
     }
@@ -272,7 +290,19 @@ class Route implements LabelableInterface
 
     public function getSessions()
     {
-        return $this->sessions;
+        $sessions = $this->sessions->toArray();
+        usort($sessions, function ($a, $b) {
+            $at = $a->getDate()->format('U');
+            $bt = $b->getDate()->format('U');
+
+            if ($at == $bt) {
+                return 0;
+            }
+
+            return $at < $bt ? -1 : 1;
+        });
+
+        return $sessions;
     }
 
     public function getLastSessionDate()
@@ -299,6 +329,13 @@ class Route implements LabelableInterface
         }
 
         return $total / count($this->sessions);
+    }
+
+    public function createSession()
+    {
+        $session = new Session;
+        $session->setRoute($this);
+        return $session;
     }
 }
 

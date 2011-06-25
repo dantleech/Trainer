@@ -1,3 +1,5 @@
+<h3>Activity</h3>
+<div>
 {% for activity in activities %}
     {% if activity.title in activeActivities %}
         {% set class="active" %}
@@ -6,14 +8,20 @@
     {% endif %}
     <a href="#" type="activity" rel="{{ activity.title }}" class="label button {{ class }}">{{ activity.title }}</a>
 {% endfor %}
-{% for label in labels %}
-    {% if label._id in activeLabels %}
-        {% set class="active" %}
-    {% else %}
-        {% set class="" %}
-    {% endif %}
-   <a href="#" type="label" rel="{{ label._id }}" class="label button {{ class }}">{{ label._id }} x {{ label.value }}</a>
-{% endfor %}
+</div>
+{% if labels|length %}
+    <h3 style="clear: both">Labels</h3>
+    <div>
+    {% for label in labels %}
+        {% if label._id in activeLabels %}
+            {% set class="active" %}
+        {% else %}
+            {% set class="" %}
+        {% endif %}
+       <a href="#" type="label" rel="{{ label._id }}" class="label button {{ class }}">{{ label._id }} x {{ label.value }}</a>
+    {% endfor %}
+    </div>
+{% endif %}
 
 <script type="text/javascript">
     $(document).ready(function () {

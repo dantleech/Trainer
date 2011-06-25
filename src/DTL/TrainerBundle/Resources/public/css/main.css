@@ -23,6 +23,20 @@ a.active, button.active {
   color: white;
 }
 
+#navigation-2 a.button {
+    float: right;
+    margin-right: 0px;
+    margin-left: 0.5em;
+}
+
 a.label {
     margin-top: 0px;
+}
+
+#title h2 {
+    margin-bottom: 0px;
+}
+
+#navigation-1, #navigation-2 {
+    text-align: right;
 }

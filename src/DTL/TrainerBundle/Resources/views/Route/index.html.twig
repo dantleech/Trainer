@@ -2,3 +2,6 @@
 {% block page_content %}
     {% include "DTLTrainerBundle:Route:_routes.html.twig" %}
 {% endblock %}
+{% block sidebar_right %}
+    {% render "DTLTrainerBundle:Filter:sidebar" with {'type': 'route'}%}
+{% endblock %}

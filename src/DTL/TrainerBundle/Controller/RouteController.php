@@ -14,6 +14,7 @@ namespace DTL\TrainerBundle\Controller;
 use DTL\TrainerBundle\Controller\Controller;
 use DTL\TrainerBundle\Document\Route;
 use DTL\TrainerBundle\Form\RouteType;
+use DTL\TrainerBundle\Form\RouteSessionType;
 
 class RouteController extends Controller
 {
@@ -44,7 +45,7 @@ class RouteController extends Controller
 
         if ($this->processForm($form)) {
             $this->notifySuccess('Route Added');
-            $this->redirect($this->generateUrl('route_new'));
+            return $this->redirect($this->generateUrl('route_new'));
         }
 
         return $this->render('DTLTrainerBundle:Route:new.html.twig', array(
@@ -60,7 +61,7 @@ class RouteController extends Controller
 
         if ($this->processForm($form)) {
             $this->notifySuccess('Route Updated');
-            $this->redirect($this->generateUrl('route_edit', array('route_id' => $route->getId())));
+            return $this->redirect($this->generateUrl('route_edit', array('route_id' => $route->getId())));
         }
 
         return $this->render('DTLTrainerBundle:Route:new.html.twig', array(
@@ -73,6 +74,24 @@ class RouteController extends Controller
     {
         $route = $this->getRoute();
         return $this->render('DTLTrainerBundle:Route:view.html.twig', array('route' => $route));
+    }
+
+    public function newSessionAction()
+    {
+        $route = $this->getRoute();
+        $session = $route->createSession();
+        $form = $this->createForm(new RouteSessionType(), $session, array('route' => $route));
+
+        if ($this->processForm($form)) {
+            $this->notifySuccess('Session Created');
+            return $this->redirect($this->generateUrl('route_view', array('route_id' => $route->getId())));
+        }
+
+
+        return $this->render('DTLTrainerBundle:Route:newSession.html.twig', array(
+            'route' => $route,
+            'form' => $form->createView(),
+        ));
     }
 }
 

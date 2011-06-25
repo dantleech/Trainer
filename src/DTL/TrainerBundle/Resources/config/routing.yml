@@ -34,6 +34,10 @@ route_view:
     pattern: /route/{route_id}
     defaults: { _controller: DTLTrainerBundle:Route:view }
 
+route_new_session:
+    pattern: /route/{route_id}/session/new
+    defaults: { _controller: DTLTrainerBundle:Route:newSession }
+
 filter_update:
     pattern: /filter/update
     defaults: { _controller: DTLTrainerBundle:Filter:update }

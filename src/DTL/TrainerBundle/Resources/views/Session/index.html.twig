@@ -2,3 +2,7 @@
 {% block page_content %}
     {% include "DTLTrainerBundle:Session:_sessions.html.twig" %}
 {% endblock %}
+{% block sidebar_right %}
+    {% render "DTLTrainerBundle:Filter:sidebar" %}
+{% endblock %}
+

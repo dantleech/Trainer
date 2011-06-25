@@ -18,5 +18,6 @@ class RouteType extends AbstractType
         $builder->add('description');
         $builder->add('distance', 'distance');
         $builder->add('time', 'stopwatch');
+        $builder->add('labels', 'csv');
     }
 }

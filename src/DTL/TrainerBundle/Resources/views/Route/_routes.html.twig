@@ -33,7 +33,7 @@
             <td>
                 <span class="sparkline-{{ route.getId }}"></span>
                 <script type="text/javascript">
-                    $('.sparkline-{{ route.getId }}').sparkline([{{ route.getTrend|join(',') }}], {'width': '50px'});
+                    $('.sparkline-{{ route.getId }}').sparkline([{{ route.getTrendPlots|join(',') }}], {'width': '50px'});
                 </script>
             </td>
         </tr>

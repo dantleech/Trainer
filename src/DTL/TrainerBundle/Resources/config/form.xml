@@ -11,6 +11,9 @@
         <service id="dtl_trainer.form.type.distance" class="DTL\TrainerBundle\Form\Type\DistanceType">
             <tag name="form.type" alias="distance" />
         </service>
+        <service id="dtl_trainer.form.type.csv" class="DTL\TrainerBundle\Form\Type\CsvType">
+            <tag name="form.type" alias="csv" />
+        </service>
     </services>
 </container>
 

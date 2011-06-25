@@ -3,6 +3,8 @@
     <script type="text/javascript" src="{{ asset("js/jquery-1.6.1.min.js") }}"></script>
     <script type="text/javascript" src="{{ asset("js/jquery.sparkline.min.js") }}"></script>
     <script type="text/javascript" src="{{ asset("js/jquery.tablesorter.min.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/flot/jquery.flot.js") }}"></script>
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{ asset('js/flot/excanvas.js') }}"></script><![endif]-->
     <link rel="stylesheet" href="{{ asset("css/blueprint/screen.css") }}" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="{{ asset("css/blueprint/print.css") }}" type="text/css" media="print"> 
     <link rel="stylesheet" href="{{ asset("css/blueprint/plugins/buttons/screen.css") }}" type="text/css" media="screen, projection"> 
@@ -13,17 +15,17 @@
 {% endblock %}
 {% block body %}
     <div class="container">
-        <div class="span-24" id="header">
+        <div class="span-12" id="header">
             <h1>Mongo Trainer</h1>
         </div>
-        <div class="span-24" id="navigation-1">
+        <div class="span-12 last" id="navigation-1">
             <a class="large" href="{{ path('sessions') }}">Sessions</a>
             <a class="large" href="{{ path('routes') }}">Routes</a>
         </div>
-        <div class="span-24" id="title">
+        <div class="span-12" id="title">
             <h2>{% block page_title %}{% endblock %}</h2>
         </div>
-        <div class="span-24" id="navigation-2">
+        <div class="span-12 last" id="navigation-2">
             {% block navigation2 %}
             {% endblock %}
         </div>
@@ -34,11 +36,11 @@
             </div>
         {% endif %}
         {% block page %}
-        <div class="span-20">
+        <div class="span-18">
             {% block page_content %}
             {% endblock %}
         </div>
-        <div class="span-4 last">
+        <div class="span-6 last">
             {% block sidebar_right %}
             {% endblock %}
         </div>
