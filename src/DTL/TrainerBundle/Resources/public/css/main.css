@@ -18,6 +18,11 @@ table.form tr {
     
 }
 
-.active {
-    background-color: green;
+a.active, button.active {
+  background-color:#336699;
+  color: white;
+}
+
+a.label {
+    margin-top: 0px;
 }

@@ -16,7 +16,7 @@ class Session
     protected $id;
 
     /**
-     * @MongoDB\ReferenceOne(targetDocument="DTL\TrainerBundle\Document\Activity")
+     * @MongoDB\EmbedOne(targetDocument="DTL\TrainerBundle\Document\Activity")
      */
     protected $activity;
 

@@ -69,4 +69,15 @@ class Controller extends BaseController
         }
         $this->get('session')->set('filters', $filters);
     }
+
+    public function filterQb($qb)
+    {
+        if ($filters = $this->getActiveFilters('label')) {
+            $qb->field('labels')->in($filters);
+        }
+
+        if ($filters = $this->getActiveFilters('activity')) {
+            $qb->field('activity.title')->in($filters);
+        }
+    }
 }

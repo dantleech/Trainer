@@ -9,9 +9,13 @@ use DTL\TrainerBundle\Form\RouteType;
 
 class FilterController extends Controller
 {
-    public function sidebarAction()
+    public function sidebarAction($type = 'session')
     {
-        $qb = $this->getDm()->createQueryBuilder('DTLTrainerBundle:Session');
+        if ($type == 'session') {
+            $qb = $this->getDm()->createQueryBuilder('DTLTrainerBundle:Session');
+        } elseif ($type == 'route') {
+            $qb = $this->getDm()->createQueryBuilder('DTLTrainerBundle:Route');
+        }
 
         $qb->map('function() {
             if (!this.labels) {
@@ -31,7 +35,7 @@ class FilterController extends Controller
             return count;
         }');
 
-    $labels = $qb->getQuery()->execute();
+        $labels = $qb->getQuery()->execute();
 
         $activities = $this->getDm()
             ->createQueryBuilder('DTLTrainerBundle:Activity')

@@ -1,10 +1,10 @@
 {% for activity in activities %}
-    {% if activity.getId in activeActivities %}
+    {% if activity.title in activeActivities %}
         {% set class="active" %}
     {% else %}
         {% set class="" %}
     {% endif %}
-    <a href="#" type="activity" rel="{{ activity.getId }}" class="label {{ class }}">{{ activity.title }}</a>
+    <a href="#" type="activity" rel="{{ activity.title }}" class="label button {{ class }}">{{ activity.title }}</a>
 {% endfor %}
 {% for label in labels %}
     {% if label._id in activeLabels %}
@@ -12,7 +12,7 @@
     {% else %}
         {% set class="" %}
     {% endif %}
-   <a href="#" type="label" rel="{{ label._id }}" class="button {{ class }}" style="margin-top: 0px">{{ label._id }} x {{ label.value }}</a>
+   <a href="#" type="label" rel="{{ label._id }}" class="label button {{ class }}">{{ label._id }} x {{ label.value }}</a>
 {% endfor %}
 
 <script type="text/javascript">

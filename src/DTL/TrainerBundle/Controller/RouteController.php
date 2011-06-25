@@ -24,11 +24,13 @@ class RouteController extends Controller
 
     public function indexAction()
     {
-        $routes = $this->getDm()
-            ->createQueryBuilder('DTLTrainerBundle:Route')
-            ->sort('title', 'asc')
-            ->getQuery()
-            ->execute();
+        $qb = $this->getDm()
+            ->createQueryBuilder('DTLTrainerBundle:Route');
+
+        $this->filterQb($qb);
+
+        $qb->sort('title', 'asc');
+        $routes = $qb->getQuery()->execute();
 
         return $this->render('DTLTrainerBundle:Route:index.html.twig', array(
             'routes' => $routes
