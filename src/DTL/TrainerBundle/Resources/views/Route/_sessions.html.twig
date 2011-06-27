@@ -8,6 +8,7 @@
         </th>
         <th>{% trans %}Pace{% endtrans %}</th>
         <th>{% trans %}Speed{% endtrans %}</th>
+        <th>{% trans %}Rank{% endtrans %}</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,9 @@
             </td>
             <td>
                 {{ format_meters(session.getAverageSpeed, 'speed') }}
+            </td>
+            <td>
+                {{ session.getRank }}
             </td>
         </tr>
     {% endfor %}

@@ -27,8 +27,12 @@
                 {{ route.getSessionCount }}
             </td>
             <td>
+                {% if route.getLastSessionDate %}
                 {{ route.getLastSessionDate.format('Y-m-d') }}<br/>
                 {{ time_ago_in_words(route.getLastSessionDate.format('U')) }}
+                {% else %}
+                    N/A
+                {% endif %}
             </td>
             <td>
                 <span class="sparkline-{{ route.getId }}"></span>

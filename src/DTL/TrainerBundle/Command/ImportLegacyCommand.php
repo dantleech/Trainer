@@ -52,7 +52,7 @@ class ImportLegacyCommand extends Command
                 $dm->flush();
             }
 
-            $session = new Session;
+            $session = $route->createSession();
             $session->setRoute($route);
             $session->setTime($domTime->getAttribute('milliseconds') / 1000);
             $session->setLog($domTime->getAttribute('notes'));

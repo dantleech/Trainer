@@ -6,7 +6,7 @@ use DTL\TrainerBundle\Document\LabelableInterface;
 use DTL\TrainerBundle\Util\MathUtil;
 
 /**
- * @MongoDB\Document
+ * @MongoDB\Document(repositoryClass="DTL\TrainerBundle\Repository\SessionRepository")
  */
 class Session
 {
@@ -19,6 +19,11 @@ class Session
      * @MongoDB\EmbedOne(targetDocument="DTL\TrainerBundle\Document\Activity")
      */
     protected $activity;
+
+    /**
+     * @MongoDB\EmbedOne(targetDocument="DTL\TrainerBundle\Document\Route")
+     */
+    protected $routeEmbeded;
 
     /**
      * @MongoDB\ReferenceOne(targetDocument="DTL\TrainerBundle\Document\Route", inversedBy="sessions")
@@ -54,6 +59,8 @@ class Session
      * @MongoDB\Collection
      */
     protected $labels;
+
+    protected $rank;
 
     public function __construct()
     {
@@ -102,6 +109,7 @@ class Session
     public function setRoute(\DTL\TrainerBundle\Document\Route $route = null)
     {
         $this->route = $route;
+        $this->routeEmbeded = $route;
     }
 
     /**
@@ -132,6 +140,11 @@ class Session
     public function getDate()
     {
         return $this->date;
+    }
+
+    public function getDateInSeconds()
+    {
+        return $this->date->format('U');
     }
 
     /**
@@ -249,5 +262,20 @@ class Session
     {
         $avg = MathUtil::average($this->getDistance(), $this->getTime() / 3600);
         return $avg;
+    }
+
+    public function setRank($i)
+    {
+        $this->rank = $i;
+    }
+
+    public function getRank()
+    {
+        return $this->rank;
+    }
+
+    public function getPerformanceIndicator()
+    {
+        return MathUtil::average($this->getDistance(), $this->getTime()) * 1000;
     }
 }

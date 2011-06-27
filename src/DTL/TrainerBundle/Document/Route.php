@@ -5,6 +5,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 use DTL\TrainerBundle\Validator\Constraints as TrainerAssert;
 use DTL\TrainerBundle\Document\LabelableInterface;
+use DTL\TrainerBundle\Util\DocumentUtil;
 
 /**
  * @MongoDB\Document
@@ -291,16 +292,9 @@ class Route implements LabelableInterface
     public function getSessions()
     {
         $sessions = $this->sessions->toArray();
-        usort($sessions, function ($a, $b) {
-            $at = $a->getDate()->format('U');
-            $bt = $b->getDate()->format('U');
-
-            if ($at == $bt) {
-                return 0;
-            }
-
-            return $at < $bt ? -1 : 1;
-        });
+        DocumentUtil::rankSessions($sessions);
+        $sessions = DocumentUtil::sortDocuments($sessions, 'getDateInSeconds');
+        $sessions = array_reverse($sessions);
 
         return $sessions;
     }
@@ -335,6 +329,7 @@ class Route implements LabelableInterface
     {
         $session = new Session;
         $session->setRoute($this);
+        $session->setActivity($this->getActivity());
         return $session;
     }
 }

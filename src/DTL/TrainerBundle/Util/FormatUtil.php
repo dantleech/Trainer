@@ -31,21 +31,21 @@ class FormatUtil
         $distance = strtolower(trim($distance));
         $unit = null;
 
-        if (!preg_match('&^[0-9]+([a-z])&', $distance)) {
+        if (!preg_match('&^[0-9\.]+([a-z])&', $distance)) {
             $unit = $defaultUnit;
         }
 
-        if (preg_match('&^([0-9]+)\s*(k|km|kilo|kilometers|kilometres)$&', $distance, $matches)) {
+        if (preg_match('&^([0-9\.]+)\s*(k|km|kilo|kilometers|kilometres)$&', $distance, $matches)) {
             $unit = 'kilometer';
             $distance = $matches[1];
         }
 
-        if (preg_match('&^([0-9]+)\s*(ml|mile|miles)$&', $distance, $matches)) {
+        if (preg_match('&^([0-9\.]+)\s*(ml|mile|miles)$&', $distance, $matches)) {
             $unit = 'mile';
             $distance = $matches[1];
         }
 
-        if (preg_match('&^([0-9]+)\s*(m|meter|meters)$&', $distance, $matches)) {
+        if (preg_match('&^([0-9\.]+)\s*(m|meter|meters)$&', $distance, $matches)) {
             $unit = 'meter';
             $distance = $matches[1];
         }

@@ -24,10 +24,8 @@ class SessionController extends Controller
 
     public function indexAction()
     {
-        $qb = $this->get('doctrine.odm.mongodb.document_manager')->createQueryBuilder('DTLTrainerBundle:Session');
-        $qb->sort('date', 'desc');
-
-        $sessions = $qb->getQuery()->execute();
+        $rep = $this->getDm()->getRepository('DTLTrainerBundle:Session');
+        $sessions = $rep->fetchRankedSessions($this->getActiveFilters('activity'));
 
         return $this->render('DTLTrainerBundle:Session:index.html.twig', array(
             'sessions' => $sessions

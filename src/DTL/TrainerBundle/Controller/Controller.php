@@ -67,6 +67,7 @@ class Controller extends BaseController
         } else {
             unset($filters[$type][$id]);
         }
+
         $this->get('session')->set('filters', $filters);
     }
 

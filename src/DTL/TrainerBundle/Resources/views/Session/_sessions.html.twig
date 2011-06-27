@@ -1,4 +1,4 @@
-<table>
+<table id="sessions">
     <thead>
         <tr>
             <th>Date</th>
@@ -6,7 +6,9 @@
             <th>Title</th>
             <th>Log</th>
             <th>Time</th>
+            <th>Pace</th>
             <th>Distance</th>
+            <th>Rank</th>
         </tr>
     </thead>
     <tbody>
@@ -20,9 +22,16 @@
             <td><a href="{{ path("session_edit", {'session_id': session.getId}) }}">{{ session.getTitle }}</a></td>
             <td>{{ session.getLog }}</td>
             <td>{{ format_seconds(session.getTime, 'stopwatch') }}</td>
+            <td>{{ format_seconds(session.getAveragePace()) }}</td>
             <td>{{ format_meters(session.getDistance) }}</td>
+            <td>{{ session.getRank }}
         </tr>
     {% endfor %}
     </tbody>
 </table>
     
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sessions').tablesorter();
+        });
+</script>
