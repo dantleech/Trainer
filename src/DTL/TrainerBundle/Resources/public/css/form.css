@@ -1,0 +1,11 @@
+label {
+    display: block;
+}
+
+select {
+    width: 100%;
+}
+
+input.title {
+    width: 100%;
+}
