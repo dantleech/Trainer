@@ -17,3 +17,8 @@ And will soon::
 
 - Feature more graphs and reports
 - Add session factors (e.g. wind, peloton, injury, etc)
+
+Screens::
+
+- *Session Index [session index](http://github.com/dantleech/Trainer/web/trainer-screen-1.png)
+- *Route View [route view](http://github.com/dantleech/Trainer/web/trainer-screen-2.png)
