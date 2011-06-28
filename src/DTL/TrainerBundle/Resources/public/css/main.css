@@ -40,3 +40,16 @@ a.label {
 #navigation-1, #navigation-2 {
     text-align: right;
 }
+
+.log-content {
+    display: none;        /* required */
+    position: absolute;   /* required */
+    padding: 10px;
+    border: 1px solid black;
+    background-color: white;
+    width: 400px;
+    background-color: #aaffaa;
+    border-color: #66aa66;
+    border-width: 2px;
+    z-index: 5;
+}

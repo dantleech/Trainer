@@ -9,13 +9,14 @@
         <th>{% trans %}Pace{% endtrans %}</th>
         <th>{% trans %}Speed{% endtrans %}</th>
         <th>{% trans %}Rank{% endtrans %}</th>
+        <th>{% trans %}Log{% endtrans %}</th>
         </tr>
     </thead>
     <tbody>
     {% for session in route.getSessions %}
         <tr>
             <td>
-                {{ session.getDate().format('Y-m-d') }}<br/>
+                <a href="{{ path("session_edit", {'session_id': session.getId}) }}">{{ session.getDate().format('Y-m-d') }}<br/></a>
                 {{ time_ago_in_words(session.getDate().format('U')) }}
             </td>
             <td>
@@ -30,6 +31,11 @@
             <td>
                 {{ session.getRank }}
             </td>
+            <td>
+                {% if session.getLog %}
+                    {% include "DTLTrainerBundle:Session:_log.html.twig" with {'log': session.getLog} %}
+                {% endif %}
+            </td>
         </tr>
     {% endfor %}
     </tbody>
@@ -38,5 +44,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#sessions').tablesorter();
-        });
+        $('.log-target').ezpz_tooltip();
+    });
 </script>

@@ -20,7 +20,11 @@
             </td>
             <td>{{ session.getActivity }}</td>
             <td><a href="{{ path("session_edit", {'session_id': session.getId}) }}">{{ session.getTitle }}</a></td>
-            <td>{{ session.getLog }}</td>
+            <td>
+                {% if session.getLog %}
+                    {% include "DTLTrainerBundle:Session:_log.html.twig" with {'log': session.getLog} %}
+                {% endif %}
+            </td>
             <td>{{ format_seconds(session.getTime, 'stopwatch') }}</td>
             <td>{{ format_seconds(session.getAveragePace()) }}</td>
             <td>{{ format_meters(session.getDistance) }}</td>
@@ -33,5 +37,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#sessions').tablesorter();
-        });
+        $('.log-target').ezpz_tooltip();
+    });
 </script>

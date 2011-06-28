@@ -9,8 +9,7 @@ security:
     providers:
         in_memory:
             users:
-                user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+                admin:  { password: ad5min6 , roles: [ 'ROLE_USER' ] }
 
     firewalls:
         profiler:
@@ -21,21 +20,11 @@ security:
             pattern:  ^/_wdt
             security: false
 
-        login:
-            pattern:  ^/demo/secured/login$
-            security: false
-
         secured_area:
-            pattern:    ^/demo/secured/
-            form_login:
-                check_path: /demo/secured/login_check
-                login_path: /demo/secured/login
-            logout:
-                path:   /demo/secured/logout
-                target: /demo/
-            #anonymous: ~
-            #http_basic:
-            #    realm: "Secured Demo Area"
+            pattern:    ^/
+            anonymous: ~
+            http_basic:
+                realm: "Trainer"
 
     access_control:
-        #- { path: /login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/, roles: ROLE_USER }
