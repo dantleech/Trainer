@@ -4,3 +4,13 @@
         <input type="{{ type }}" {{ block('attributes') }} class="text {% if errors %}inavlid{% endif %}" value="{{ value }}" />
     {% endspaceless %}
 {% endblock %}
+
+{% block field_row %}
+{% spaceless %}
+    <div class="{% if class is defined %}{{ class }}{% endif %}">
+        {{ form_label(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+    </div>
+{% endspaceless %}
+{% endblock field_row %}

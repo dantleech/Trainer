@@ -20,7 +20,6 @@ twig:
     strict_variables: %kernel.debug%
     form:
         resources:
-            - 'form_table_layout.html.twig'
             - 'DTLTrainerBundle::form.html.twig'
 
 # Assetic Configuration

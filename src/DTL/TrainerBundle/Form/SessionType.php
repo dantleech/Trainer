@@ -12,7 +12,9 @@ class SessionType extends AbstractType
         $builder->add('activity');
         $builder->add('route');
         $builder->add('title');
-        $builder->add('date', 'date');
+        $builder->add('date', 'date', array(
+            'widget' => 'single_text',
+        ));
         $builder->add('distance', 'distance');
         $builder->add('time', 'stopwatch');
         $builder->add('log', 'textarea');

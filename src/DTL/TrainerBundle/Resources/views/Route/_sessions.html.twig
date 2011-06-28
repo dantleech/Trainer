@@ -15,7 +15,7 @@
     {% for session in route.getSessions %}
         <tr>
             <td>
-                {{ session.getDate().format('Y-m-d') }}<br/>
+                <a href="{{ path('session_edit', {'session_id': session.getId}) }}">{{ session.getDate().format('Y-m-d') }}</a><br/>
                 {{ time_ago_in_words(session.getDate().format('U')) }}
             </td>
             <td>
