@@ -8,6 +8,11 @@ use DTL\TrainerBundle\Document\Route;
 
 class RouteType extends AbstractType
 {
+    public function getName()
+    {
+        return 'route';
+    }
+
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder->add('activity');

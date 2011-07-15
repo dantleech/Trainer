@@ -7,6 +7,11 @@ use Symfony\Component\Form\FormBuilder;
 
 class SessionType extends AbstractType
 {
+    public function getName()
+    {
+        return 'session';
+    }
+
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder->add('activity');
