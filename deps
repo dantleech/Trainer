@@ -65,3 +65,7 @@
 
 [blueprint]
     git=http://github.com/joshuaclayton/blueprint-css.git
+
+[FOSUserBundle]
+    git=https://github.com/FriendsOfSymfony/FOSUserBundle.git
+    target=/bundles/FriendsOfSymfony/FOSUserBundle

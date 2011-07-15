@@ -7,6 +7,11 @@ use Symfony\Component\Form\FormBuilder;
 
 class RouteSessionType extends AbstractType
 {
+    public function getName()
+    {
+        return 'route_session';
+    }
+
     public function buildForm(FormBuilder $builder, array $options)
     {
         $rankedBy = $options['route']->getRankedBy();

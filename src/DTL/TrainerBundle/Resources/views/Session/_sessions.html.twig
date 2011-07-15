@@ -26,7 +26,7 @@
                 {% endif %}
             </td>
             <td>{{ format_seconds(session.getTime, 'stopwatch') }}</td>
-            <td>{{ format_seconds(session.getAveragePace()) }}</td>
+            <td>{{ format_average_pace(session.getTime, session.getDistance) }}</td>
             <td>{{ format_meters(session.getDistance) }}</td>
             <td>{{ session.getRank }}
         </tr>
