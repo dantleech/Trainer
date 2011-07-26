@@ -66,3 +66,8 @@ doctrine_mongodb:
             database:       trainer
     connections:
         default:
+
+fos_user:
+    db_driver:     mongodb
+    firewall_name: secured_area
+    user_class:  DTL\TrainerBundle\Document\User
