@@ -5,6 +5,9 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="dtl_trainer.services.distance_formatter" class="DTL\TrainerBundle\Services\DistanceFormatter"/>
+        <service id="dtl_trainer.user.preferences" class="DTL\TrainerBundle\User\Preferences">
+            <argument type="service" id="security.context"/>
+            <argument type="service" id="doctrine.odm.mongodb.document_manager"/>
+        </service>
     </services>
-
+</container>

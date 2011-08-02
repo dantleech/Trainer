@@ -55,20 +55,21 @@ class Controller extends BaseController
 
     public function getActiveFilters($type)
     {
-        $filters = $this->get('session')->get('filters');
+        $filters = $this->getPreferences()->get('filters', array());
         return isset($filters[$type]) ? $filters[$type] : array();
     }
 
     public function filterToggle($type, $id)
     {
-        $filters = $this->get('session')->get('filters');
+        $filters = $this->getPreferences()->get('filters', array());
         if (!isset($filters[$type][$id])) {
             $filters[$type][$id] = $id;
         } else {
             unset($filters[$type][$id]);
         }
 
-        $this->get('session')->set('filters', $filters);
+        $this->getPreferences()->set('filters', $filters);
+        $this->getPreferences()->burn();
     }
 
     public function filterQb($qb)
@@ -80,5 +81,10 @@ class Controller extends BaseController
         if ($filters = $this->getActiveFilters('activity')) {
             $qb->field('activity.title')->in($filters);
         }
+    }
+
+    public function getPreferences()
+    {
+        return $this->container->get('dtl_trainer.user.preferences');
     }
 }

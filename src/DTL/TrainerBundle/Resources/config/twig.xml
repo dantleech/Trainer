@@ -7,6 +7,7 @@
     <services>
         <service id="dtl_trainer.twig.extension" class="DTL\TrainerBundle\Twig\Extension\TrainerExtension">
             <tag name="twig.extension"/>
+            <argument type="service" id="dtl_trainer.user.preferences"/>
         </service>
     </services>
 </container>
