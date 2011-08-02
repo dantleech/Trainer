@@ -7,8 +7,21 @@ class DocumentUtil
     public static function rankSessions($sessions)
     {
         $sessions = self::sortDocuments($sessions, 'getAveragePace');
+        $zeroTimed = array();
+
         foreach ($sessions as $i => $session) {
-            $session->setRank($i + 1);
+            if (!$sessions[$i]->getTime() || !$sessions[$i]->getDistance()) {
+                $session->setRank('999999');
+                unset($sessions[$i]);
+            } else {
+                break;
+            }
+        }
+
+        $rank = 1;
+        foreach ($sessions as $session) {
+            $session->setRank($rank);
+            $rank++;
         }
     }
 

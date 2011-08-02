@@ -7,9 +7,8 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        in_memory:
-            users:
-                admin:  { password: ad5min6 , roles: [ 'ROLE_USER' ] }
+        fos_userbundle:
+            id: fos_user.user_manager
 
     firewalls:
         profiler:
@@ -25,6 +24,7 @@ security:
             anonymous: ~
             http_basic:
                 realm: "Trainer"
+                provider: fos_userbundle
 
     access_control:
         - { path: ^/, roles: ROLE_USER }
