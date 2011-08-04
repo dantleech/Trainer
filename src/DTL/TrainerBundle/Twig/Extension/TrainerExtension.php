@@ -16,6 +16,12 @@ class TrainerExtension extends \Twig_Extension
         $this->preferences = $preferences;
     }
 
+    public function initRuntime(\Twig_Environment $env)
+    {
+        $env->addGlobal('user_preference', $this->preferences);
+    }
+
+
     public function getFunctions()
     {
         return array(
@@ -42,12 +48,11 @@ class TrainerExtension extends \Twig_Extension
         return FormatUtil::secondsToStopwatch($seconds);
     }
 
-    public function formatMeters($meters, $for = 'distance')
+    public function formatMeters($meters)
     {
-        $km = $meters / 1000;
-        $formatted = number_format($km, 2);
-
-        return $formatted;
+        $distance = FormatUtil::metersToDistance($meters, $this->preferences->get('distanceUnit'));
+        $distance = number_format($distance, 2);
+        return $distance;
     }
 
     public function formatMeasure($measure, $measuredBy)
@@ -61,7 +66,9 @@ class TrainerExtension extends \Twig_Extension
 
     public function formatAveragePace($time, $distance)
     {
-        $avg = MathUtil::average($time, $distance / 1000);
+        $avg = MathUtil::average($time, 
+            FormatUtil::metersToDistance($distance, $this->preferences->get('distanceUnit'))
+        );
         return $this->formatSeconds($avg);
     }
 

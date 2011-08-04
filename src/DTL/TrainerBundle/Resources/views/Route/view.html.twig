@@ -10,6 +10,9 @@
 {% block page %}
 <div class="span-24">
 <h3>{{ route.title }}</h3>
+{% if route.getDescription %}
+    <p>{{ route.getDescription }}</p>
+{% endif %}
 <table>
     <thead>
         <tr>

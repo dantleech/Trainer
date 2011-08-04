@@ -4,6 +4,8 @@ namespace DTL\TrainerBundle\Util;
 
 class FormatUtil
 {
+    const MILES_IN_KILOMETER = 0.62137119;
+
     public static function secondsToStopwatch($seconds)
     {
         $hours = floor($seconds / 60 / 60);
@@ -65,11 +67,17 @@ class FormatUtil
         }
     }
 
-    public static function metersToDistance($meters, $unit = 'kilometer')
+    public static function metersToDistance($meters, $unit = 'km')
     {
+        if (!in_array($unit, array('km', 'm'))) {
+            throw new \InvalidArgumentException('Distance unit must be either "km" or "ml", "'.$unit.'" given');
+        }
+
         $con = $meters / 1000;
-        $formatted = sprintf('%s%s', number_format($con, 2), 'km');
-        return $formatted;
+        if ($unit == 'm') {
+            $con = $con * self::MILES_IN_KILOMETER;
+        }
+        return $con;
     }
 
     public static function distanceOfTimeInWords($from_time, $to_time = null, $include_seconds = false)

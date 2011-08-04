@@ -8,6 +8,9 @@ class Preferences
 {
     protected $securityContext;
     protected $dm;
+    protected $defaults = array(
+        'distanceUnit' => 'km'
+    );
 
     public function __construct(SecurityContext $securityContext, DocumentManager $dm) 
     {
@@ -24,8 +27,10 @@ class Preferences
     {
         $v = $this->getUser()->getPreference($field);
 
-        if ($v === null) {
+        if ($v === null && $default) {
             return $default;
+        } elseif ($v === null && array_key_exists($field, $this->defaults)) {
+            return $this->defaults[$field];
         }
 
         return $v;
