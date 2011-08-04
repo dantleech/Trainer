@@ -1,15 +1,14 @@
 <table id="sessions">
     <thead>
         <tr>
-        <th>{% trans %}Date{% endtrans %}</th>
-        <th>
-            {{ route.getRankedBy|trans() }}
-        </th>
-        </th>
-        <th>{% trans %}Pace{% endtrans %}</th>
-        <th>{% trans %}Speed{% endtrans %}</th>
-        <th>{% trans %}Rank{% endtrans %}</th>
-        <th>{% trans %}Log{% endtrans %}</th>
+            <th>{% trans %}Date{% endtrans %}</th>
+            <th>
+                {{ route.getRankedBy|trans() }}
+            </th>
+            <th>{% trans %}Pace{% endtrans %}</th>
+            <th>{% trans %}Speed{% endtrans %}</th>
+            <th>{% trans %}Rank{% endtrans %}</th>
+            <th>{% trans %}Log{% endtrans %}</th>
         </tr>
     </thead>
     <tbody>
@@ -23,7 +22,7 @@
                 {{ format_measure(route.getSessionMeasure(session), route.getRankedBy) }}
             </td>
             <td>
-                {{ format_seconds(session.getAveragePace) }}
+                {{ format_average_pace(session.getTime, session.getDistance) }}
             </td>
             <td>
                 {{ format_meters(session.getAverageSpeed, 'speed') }}

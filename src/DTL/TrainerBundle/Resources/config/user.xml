@@ -9,5 +9,10 @@
             <argument type="service" id="security.context"/>
             <argument type="service" id="doctrine.odm.mongodb.document_manager"/>
         </service>
+
+        <service id="dtl_trainer.user.preferenceListener" class="DTL\TrainerBundle\User\PreferenceListener">
+            <tag name="kernel.event_listener" event="kernel.request" method="registerPreferences"/>
+            <argument type="service" id="dtl_trainer.user.preferences" />
+        </service>
     </services>
 </container>

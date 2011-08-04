@@ -6,9 +6,16 @@
             <th>Title</th>
             <th>Log</th>
             <th>Time</th>
-            <th>Pace</th>
-            <th>Distance</th>
+            <th>Pace <span class="small"></span></th>
+            <th>Distance <span class="small"></span></th>
             <th>Rank</th>
+        </tr>
+        <tr>
+            <th colspan="4"></th>
+            <th class="small">h:m:s</th>
+            <th class="small">mp{{ user_preference.get('distanceUnit') }}</th>
+            <th class="small">{{ user_preference.get('distanceUnit') }}</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
