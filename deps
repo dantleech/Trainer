@@ -1,5 +1,6 @@
 [symfony]
     git=http://github.com/symfony/symfony.git
+    version=origin/2.0
 
 [twig]
     git=http://github.com/fabpot/Twig.git
@@ -33,6 +34,11 @@
 [SensioFrameworkExtraBundle]
     git=http://github.com/sensio/SensioFrameworkExtraBundle.git
     target=/bundles/Sensio/Bundle/FrameworkExtraBundle
+
+[SensioDistributionBundle]
+    git=http://github.com/sensio/SensioDistributionBundle.git
+    target=/bundles/Sensio/Bundle/DistributionBundle
+
 
 [JMSSecurityExtraBundle]
     git=http://github.com/schmittjoh/SecurityExtraBundle.git

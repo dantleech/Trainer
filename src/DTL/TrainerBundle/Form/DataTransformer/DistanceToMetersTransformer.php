@@ -10,7 +10,7 @@ class DistanceToMetersTransformer implements DataTransformerInterface
     public function transform($value)
     {
         if ($value) {
-            return FormatUtil::metersToDistance($value, 'kilometer');
+            return FormatUtil::metersToDistance($value, 'km');
         }
     }
 
