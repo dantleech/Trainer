@@ -53,7 +53,7 @@
     target=/bundles/Symfony/Bundle/AsseticBundle
 
 [DoctrineMongoDBBundle]
-    git=git://github.com/symfony/DoctrineMongoDBBundle.git
+    git=git://github.com/dantleech/DoctrineMongoDBBundle.git
     target=/bundles/Symfony/Bundle/DoctrineMongoDBBundle
 
 [doctrine-mongodb-odm]
