@@ -24,7 +24,7 @@ class Route implements LabelableInterface
     protected $title;
 
     /**
-     * @MongoDB\EmbedOne(targetDocument="DTL\TrainerBundle\Document\Activity")
+     * @MongoDB\ReferenceOne(targetDocument="DTL\TrainerBundle\Document\Activity")
      * @Assert\NotBlank()
      */
     protected $activity;

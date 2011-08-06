@@ -16,14 +16,9 @@ class Session
     protected $id;
 
     /**
-     * @MongoDB\EmbedOne(targetDocument="DTL\TrainerBundle\Document\Activity")
+     * @MongoDB\ReferenceOne(targetDocument="DTL\TrainerBundle\Document\Activity")
      */
     protected $activity;
-
-    /**
-     * @MongoDB\EmbedOne(targetDocument="DTL\TrainerBundle\Document\Route")
-     */
-    protected $routeEmbeded;
 
     /**
      * @MongoDB\ReferenceOne(targetDocument="DTL\TrainerBundle\Document\Route", inversedBy="sessions")
@@ -109,7 +104,6 @@ class Session
     public function setRoute(\DTL\TrainerBundle\Document\Route $route = null)
     {
         $this->route = $route;
-        $this->routeEmbeded = $route;
     }
 
     /**
