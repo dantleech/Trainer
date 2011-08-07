@@ -244,23 +244,16 @@ class Route implements LabelableInterface
         }
     }
 
-    public function getBest()
+    public function getBestSession()
     {
         $best = null;
         foreach ($this->sessions as $session) {
-            $measure = $this->getSessionMeasure($session);
             if (!$best) {
-                $best = $measure;
+                $best = $session;
             }
 
-            if ($this->isMeasuredBy('distance')) {
-                if ($measure < $best) {
-                    $best = $measure;
-                }
-            } else {
-                if ($measure > $best) {
-                    $best = $measure;
-                }
+            if ($session->getAverageSpeed() > $best->getAverageSpeed()) {
+                $best = $session;
             }
         }
 

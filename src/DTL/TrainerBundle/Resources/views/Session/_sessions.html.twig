@@ -4,18 +4,12 @@
             <th>Date</th>
             <th>Activity</th>
             <th>Title</th>
-            <th>Log</th>
+            <th class="small">{{ user_preference.get('distanceUnit')|upper }}'s</th>
             <th>Time</th>
-            <th>Pace <span class="small"></span></th>
-            <th>Distance <span class="small"></span></th>
+            <th class="small">MP{{ user_preference.get('distanceUnit')|upper }}</th>
+            <th class="small">{{ user_preference.get('distanceUnit')|upper }}PH</th>
             <th>Rank</th>
-        </tr>
-        <tr>
-            <th colspan="4"></th>
-            <th class="small">h:m:s</th>
-            <th class="small">mp{{ user_preference.get('distanceUnit') }}</th>
-            <th class="small">{{ user_preference.get('distanceUnit') }}</th>
-            <th></th>
+            <th>Log</th>
         </tr>
     </thead>
     <tbody>
@@ -29,15 +23,16 @@
             <td>
                 <a href="{{ path("session_view", {'session_id': session.getId}) }}">{{ session.getTitle }}</a>
             </td>
+            <td>{{ format_meters(session.getDistance) }}</td>
+            <td>{{ format_seconds(session.getTime, 'stopwatch') }}</td>
+            <td>{{ format_average_pace(session.getTime, session.getDistance) }}</td>
+            <td>{{ format_average_speed(session.getTime, session.getDistance) }}</td>
+            <td>{{ session.getRank }}
             <td>
                 {% if session.getLog %}
                     {% include "DTLTrainerBundle:Session:_log.html.twig" with {'log': session.getLog} %}
                 {% endif %}
             </td>
-            <td>{{ format_seconds(session.getTime, 'stopwatch') }}</td>
-            <td>{{ format_average_pace(session.getTime, session.getDistance) }}</td>
-            <td>{{ format_meters(session.getDistance) }}</td>
-            <td>{{ session.getRank }}
         </tr>
     {% endfor %}
     </tbody>

@@ -5,8 +5,8 @@
             <th>
                 {{ route.getRankedBy|trans() }}
             </th>
-            <th>{% trans %}Pace{% endtrans %}</th>
-            <th>{% trans %}Speed{% endtrans %}</th>
+            <th class="small">MP{{ user_preference.get('distanceUnit')|upper }}</th>
+            <th class="small">{{ user_preference.get('distanceUnit')|upper }}PH</th>
             <th>{% trans %}Rank{% endtrans %}</th>
             <th>{% trans %}Log{% endtrans %}</th>
         </tr>

@@ -1,2 +1,2 @@
 <span class="log-target" id="log-target-{{ session.getId }}"><img src="{{ asset('bundles/dtltrainer/icons/note.png') }}"/></span>
-<div class="log-content" id="log-content-{{ session.getId }}">{{ session.getLog }}</div>
+<div class="log-content" id="log-content-{{ session.getId }}">{{ session.getLog|replace({"\n": "<br/>"})|raw }}</div>

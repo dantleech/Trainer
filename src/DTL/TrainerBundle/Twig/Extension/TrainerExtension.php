@@ -30,6 +30,7 @@ class TrainerExtension extends \Twig_Extension
             'format_measure' => new \Twig_Function_Method($this, 'formatMeasure'),
             'time_ago_in_words' => new \Twig_Function_Method($this, 'timeAgoInWords'),
             'format_average_pace' => new \Twig_Function_Method($this, 'formatAveragePace'),
+            'format_average_speed' => new \Twig_Function_Method($this, 'formatAverageSpeed'),
         );
     }
 
@@ -71,6 +72,17 @@ class TrainerExtension extends \Twig_Extension
         );
         return $this->formatSeconds($avg);
     }
+
+    public function formatAverageSpeed($time, $distance)
+    {
+        $avg = MathUtil::average(
+            FormatUtil::metersToDistance($distance, $this->preferences->get('distanceUnit')),
+            $time / 60 / 60
+        );
+    
+        return number_format($avg, 2);
+    }
+
 
     public function getName()
     {

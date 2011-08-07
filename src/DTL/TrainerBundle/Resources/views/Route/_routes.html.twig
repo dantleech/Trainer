@@ -2,30 +2,26 @@
     <thead>
         <tr>
             <th></th>
+            <th>Last</th>
             <th>Activity</th>
             <th>Title</th>
-            <th>Distance / Time</th>
-            <th>Best</th>
+            <th>Dst/Tme</th>
+            <th colspan="3">Best</th>
             <th>Sessions</th>
-            <th>Last</th>
             <th>Trend</th>
+        </tr>
+        <tr class="small">
+            <th colspan="5"></th>
+            <th>Tme/Dst</th>
+            <th>MP{{ user_preference.get('distanceUnit')|upper }}</th>
+            <th>{{ user_preference.get('distanceUnit')|upper }}PH</th>
+            <Th colspan="4"></th>
         </tr>
     </thead>
     <tbody>
     {% for route in routes %}
         <tr>
             <td><img src="{{ asset('bundles/dtltrainer/icons/%icon%.png'|replace({'%icon%': route.getActivity.getIcon})) }}"/></td>
-            <td>{{ route.getActivity }}</td>
-            <td><a href="{{ path('route_view', {'route_id': route.getId}) }}">{{ route.getTitle }}</a></td>
-            <td>
-                {{ format_measure(route.getMeasure, route.getMeasuredBy) }}
-            </td>
-            <td>
-                {{ format_measure(route.getBest, route.getRankedBy) }}
-            </td>
-            <td>
-                {{ route.getSessionCount }}
-            </td>
             <td>
                 {% if route.getLastSessionDate %}
                 {{ route.getLastSessionDate.format('Y-m-d') }}<br/>
@@ -33,6 +29,23 @@
                 {% else %}
                     N/A
                 {% endif %}
+            </td>
+            <td>{{ route.getActivity }}</td>
+            <td><a href="{{ path('route_view', {'route_id': route.getId}) }}">{{ route.getTitle }}</a></td>
+            <td>
+                {{ format_measure(route.getMeasure, route.getMeasuredBy) }}
+            </td>
+            <td>
+                {{ format_measure(route.getSessionMeasure(route.getBestSession), route.getRankedBy) }}
+            </td>
+            <td>
+                {{ format_average_pace(route.getBestSession.getTime, route.getBestSession.getDistance) }}
+            </td>
+            <td>
+                {{ format_average_speed(route.getBestSession.getTime, route.getBestSession.getDistance) }}
+            </td>
+            <td>
+                {{ route.getSessionCount }}
             </td>
             <td>
                 <span class="sparkline-{{ route.getId }}"></span>
