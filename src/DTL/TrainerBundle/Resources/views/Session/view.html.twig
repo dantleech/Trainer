@@ -1,0 +1,42 @@
+{% extends "DTLTrainerBundle:Session:layout.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block navigation2 %}
+    {{ parent() }}
+    <a class="button" href="{{ path('session_edit', {'session_id': session.getId}) }}">{% trans %}Edit{% endtrans %}</a>
+{% endblock %}
+{% block page %}
+<div class="span-24">
+{% if session.getRoute %}
+    <h3><a href="{{ path('route_view', {'route_id': session.getRoute.getId}) }}#session_{{ session.getId }}">{{ session.getRoute.getTitle }}</a></h3>
+{% else %}
+    <h3>{{ session.title }}</h3>
+{% endif %}
+<table>
+    <thead>
+        <tr>
+            <th>{% trans %}Date{% endtrans %}</th>
+            <th>{% trans %}Activity{% endtrans %}</th>
+            <th>{% trans %}Distance{% endtrans %}</th>
+            <th>{% trans %}Time{% endtrans %}</th>
+            <th>{% trans %}Labels{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ session.getDate().format('d-m-Y') }}</td>
+            <td>{{ session.getActivity.getTitle }}</td>
+            <td>{{ format_measure(session.getDistance, 'distance') }}</td>
+            <td>{{ format_measure(session.getTime, 'time') }}</td>
+            <td>{{ session.getLabels|join(',') }}</td>
+        </tr>
+    </tbody>
+</table>
+{% if session.getLog %}
+    <h4>Log</h4>
+    {{ session.getLog|replace({"\n": "<br/>"})|raw }}
+{% endif %}
+
+</div>
+{% endblock %}
