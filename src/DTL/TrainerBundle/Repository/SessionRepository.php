@@ -9,8 +9,13 @@ class SessionRepository extends DocumentRepository
     public function fetchRankedSessions($activities)
     {
         $qb = $this->createQueryBuilder();
+
         if ($activities) {
-            $qb->field('activity.title')->in($activities);
+            $ids = array();
+            foreach ($activities as $activity) {
+                $ids[] = new \MongoId($activity);
+            }
+            $qb->field('activity.$id')->in($ids);
         }
         $sessions = $qb->getQuery()->execute()->toArray();
         DocumentUtil::rankSessions($sessions);

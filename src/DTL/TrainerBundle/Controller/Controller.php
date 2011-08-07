@@ -77,10 +77,6 @@ class Controller extends BaseController
         if ($filters = $this->getActiveFilters('label')) {
             $qb->field('labels')->in($filters);
         }
-
-        if ($filters = $this->getActiveFilters('activity')) {
-            $qb->field('activity.title')->in($filters);
-        }
     }
 
     public function getPreferences()
