@@ -81,12 +81,7 @@ class RouteController extends Controller
     public function viewAction()
     {
         $route = $this->getRoute();
-        return $this->render('DTLTrainerBundle:Route:view.html.twig', array('route' => $route));
-    }
 
-    public function newSessionAction()
-    {
-        $route = $this->getRoute();
         $session = $route->createSession();
         $form = $this->createForm(new RouteSessionType(), $session, array('route' => $route));
 
@@ -95,8 +90,7 @@ class RouteController extends Controller
             return $this->redirect($this->generateUrl('route_view', array('route_id' => $route->getId())));
         }
 
-
-        return $this->render('DTLTrainerBundle:Route:newSession.html.twig', array(
+        return $this->render('DTLTrainerBundle:Route:view.html.twig', array(
             'route' => $route,
             'form' => $form->createView(),
         ));

@@ -5,7 +5,7 @@
 {% block navigation2 %}
     {{ parent() }}
     <a class="button" href="{{ path('route_edit', {'route_id': route.getId}) }}">{% trans %}Edit{% endtrans %}</a>
-    <a class="button" href="{{ path('route_new_session', {'route_id': route.getId}) }}">{% trans %}New Session{% endtrans %}</a>
+    <a class="button" href="#new_session">{% trans %}New Session{% endtrans %}</a>
 {% endblock %}
 {% block page %}
 <div class="span-24">
@@ -35,6 +35,8 @@
 <div class="span-12">
     <h4>{% trans %}Sessions{% endtrans %}</h4>
     {% include "DTLTrainerBundle:Route:_sessions.html.twig" with {'sessions': route.getSessions()} %}
+    <h4 id="new_session">{% trans %}New Session{% endtrans %}</h4>
+    {% include "DTLTrainerBundle:Route:_formNewSession.html.twig" with {'form': form, 'route': route} %}
 </div>
 <div class="span-12 last">
     <h4>{% trans %}Performance{% endtrans %}</h4>
