@@ -44,6 +44,14 @@ class SessionController extends Controller
         return $this->processPage($session);
     }
 
+    public function viewAction()
+    {
+        $session = $this->getSession();
+        return $this->render('DTLTrainerBundle:Session:view.html.twig', array(
+            'session' => $session,
+        ));
+    }
+
     public function deleteAction()
     {
         $session = $this->getSession();

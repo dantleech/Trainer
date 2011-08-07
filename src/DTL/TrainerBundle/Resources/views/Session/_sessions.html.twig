@@ -26,7 +26,9 @@
                 {{ time_ago_in_words(session.getDate.format('U')) }}
             </td>
             <td>{{ session.getActivity }}</td>
-            <td><a href="{{ path("session_edit", {'session_id': session.getId}) }}">{{ session.getTitle }}</a></td>
+            <td>
+                <a href="{{ path("session_view", {'session_id': session.getId}) }}">{{ session.getTitle }}</a>
+            </td>
             <td>
                 {% if session.getLog %}
                     {% include "DTLTrainerBundle:Session:_log.html.twig" with {'log': session.getLog} %}
