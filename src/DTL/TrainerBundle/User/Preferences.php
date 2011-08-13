@@ -9,7 +9,8 @@ class Preferences
     protected $securityContext;
     protected $dm;
     protected $defaults = array(
-        'distanceUnit' => 'km'
+        'distanceUnit' => 'km',
+        'siteTitle' => 'Mongo Trainer',
     );
 
     public function __construct(SecurityContext $securityContext, DocumentManager $dm) 

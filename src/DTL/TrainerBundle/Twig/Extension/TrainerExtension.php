@@ -21,7 +21,6 @@ class TrainerExtension extends \Twig_Extension
         $env->addGlobal('user_preference', $this->preferences);
     }
 
-
     public function getFunctions()
     {
         return array(
@@ -83,10 +82,27 @@ class TrainerExtension extends \Twig_Extension
         return number_format($avg, 2);
     }
 
+    public function twigTruncateFilter(\Twig_Environment $env, $value, $length = 30, $preserve = false, $separator = '...')
+    {
+die('asd');
+        if (strlen($value) > $length) {
+            if ($preserve) {
+                if (false !== ($breakpoint = strpos($value, ' ', $length))) {
+                    $length = $breakpoint;
+                }
+            }
+
+            return substr($value, 0, $length) . $separator;
+        }
+
+        return $value;
+    }
+
 
     public function getName()
     {
         return "trainer";
     }
 }
+
 

@@ -8,7 +8,11 @@ session_new:
 
 sessions:
     pattern: /sessions
-    defaults: { _controller: DTLTrainerBundle:Session:index }
+    defaults: { _controller: DTLTrainerBundle:Session:index, _format: html }
+
+sessions_rss:
+    pattern: /sessions/rss
+    defaults: { _controller: DTLTrainerBundle:Session:index, _format: rss }
 
 session_edit:
     pattern: /session/{session_id}/edit

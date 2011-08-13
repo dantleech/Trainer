@@ -26,8 +26,9 @@ class SessionController extends Controller
     {
         $rep = $this->getDm()->getRepository('DTLTrainerBundle:Session');
         $sessions = $rep->fetchRankedSessions($this->getActiveFilters('activity'));
+        $format = $this->get('request')->get('_format');
 
-        return $this->render('DTLTrainerBundle:Session:index.html.twig', array(
+        return $this->render('DTLTrainerBundle:Session:index.'.$format.'.twig', array(
             'sessions' => $sessions
         ));
     }
