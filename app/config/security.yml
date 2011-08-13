@@ -19,6 +19,10 @@ security:
             pattern:  ^/_wdt
             security: false
 
+        session_rss:
+            pattern: ^/sessions/rss
+            security: false
+
         secured_area:
             pattern:    ^/
             anonymous: ~

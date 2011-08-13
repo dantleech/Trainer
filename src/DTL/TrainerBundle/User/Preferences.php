@@ -21,12 +21,20 @@ class Preferences
 
     public function getUser()
     {
-        return $this->securityContext->getToken()->getUser();
+        if ($this->securityContext->getToken()) {
+            return $this->securityContext->getToken()->getUser();
+        }
+
+        return null;
     }
 
     public function get($field, $default = null)
     {
-        $v = $this->getUser()->getPreference($field);
+        if ($user = $this->getUser()) {
+            $v = $this->getUser()->getPreference($field);
+        } else {
+            $v = null;
+        }
 
         if ($v === null && $default) {
             return $default;
