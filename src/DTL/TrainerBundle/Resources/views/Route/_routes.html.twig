@@ -60,6 +60,12 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#routes').tablesorter();
+        $('#routes').tablesorter({
+            headers: {
+                1: {
+                    sorter: 'date_with_words',
+                }
+            }
+        });
         });
 </script>

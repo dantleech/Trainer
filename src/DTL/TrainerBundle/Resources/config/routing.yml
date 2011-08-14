@@ -1,6 +1,6 @@
 homepage:
     pattern: /
-    defaults: { _controller: DTLTrainerBundle:Session:index }
+    defaults: { _controller: DTLTrainerBundle:Session:index, _format: html }
 
 session_new:
     pattern: /session/new

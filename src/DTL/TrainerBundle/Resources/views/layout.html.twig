@@ -15,6 +15,23 @@
     <link rel="stylesheet" href="{{ asset("bundles/dtltrainer/css/main.css") }}" type="text/css" media="screen, projection">
 {% endblock %}
 {% block body %}
+    <!-- Add tablesorter parser to parse date column with words !-->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.tablesorter.addParser({
+                id: 'date_with_words',
+                is: function (s) {
+                    return false;
+                },
+                format: function (s) {
+                    var s = $.trim(s).substr(0,10).replace(/-/g, '');
+                    console.log(s);
+                    return s;
+                },
+                type: 'numeric',
+            });
+        });
+    </script>
     <div class="container">
         <div class="span-12" id="header">
             <h1>Mongo Trainer</h1>

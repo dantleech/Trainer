@@ -40,7 +40,13 @@
     
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#sessions').tablesorter();
+        $('#sessions').tablesorter({
+            headers: {
+                0: {
+                    sorter: 'date_with_words',
+                }
+            }
+        });
         $('.log-target').ezpz_tooltip();
     });
 </script>
