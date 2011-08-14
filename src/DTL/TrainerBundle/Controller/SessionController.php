@@ -25,7 +25,7 @@ class SessionController extends Controller
     public function indexAction()
     {
         $rep = $this->getDm()->getRepository('DTLTrainerBundle:Session');
-        $sessions = $rep->fetchRankedSessions($this->getActiveFilters('activity'));
+        $sessions = $rep->fetchRankedSessions($this->getActiveFilters('activity'), $this->getActiveFilters('label_session'));
         $format = $this->get('request')->get('_format');
 
         return $this->render('DTLTrainerBundle:Session:index.'.$format.'.twig', array(
@@ -75,7 +75,7 @@ class SessionController extends Controller
 
         if ($this->processForm($form)) {
             $this->notifySuccess($message);
-            $this->redirect($this->generateUrl('session_edit', array('session_id' => $session->getId())));
+            return $this->redirect($this->generateUrl('session_view', array('session_id' => $session->getId())));
         }
 
         return $this->render('DTLTrainerBundle:Session:'.$template.'.html.twig', array(

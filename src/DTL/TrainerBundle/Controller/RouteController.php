@@ -28,7 +28,9 @@ class RouteController extends Controller
         $qb = $this->getDm()
             ->createQueryBuilder('DTLTrainerBundle:Route');
 
-        $this->filterQb($qb);
+        if ($filters = $this->getActiveFilters('label_route')) {
+            $qb->field('labels')->in($filters);
+        }
 
         if ($activities = $this->getActiveFilters('activity')) {
             $ids = array();
@@ -53,7 +55,7 @@ class RouteController extends Controller
 
         if ($this->processForm($form)) {
             $this->notifySuccess('Route Added');
-            return $this->redirect($this->generateUrl('route_new'));
+            return $this->redirect($this->generateUrl('route_view', array('route_id' => $route->getId())));
         }
 
         return $this->render('DTLTrainerBundle:Route:new.html.twig', array(
@@ -69,10 +71,10 @@ class RouteController extends Controller
 
         if ($this->processForm($form)) {
             $this->notifySuccess('Route Updated');
-            return $this->redirect($this->generateUrl('route_edit', array('route_id' => $route->getId())));
+            return $this->redirect($this->generateUrl('route_view', array('route_id' => $route->getId())));
         }
 
-        return $this->render('DTLTrainerBundle:Route:new.html.twig', array(
+        return $this->render('DTLTrainerBundle:Route:edit.html.twig', array(
             'form' => $form->createView(),
             'route' => $route,
         ));
@@ -95,5 +97,13 @@ class RouteController extends Controller
             'form' => $form->createView(),
         ));
     }
-}
 
+    public function deleteAction()
+    {
+        $route = $this->getRoute();
+        $this->getDm()->remove($route);
+        $this->getDm()->flush();
+        $this->notifySuccess('Route Deleted');
+        return $this->redirect($this->generateUrl('routes'));
+    }
+}

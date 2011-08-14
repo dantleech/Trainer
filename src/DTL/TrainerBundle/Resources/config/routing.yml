@@ -38,6 +38,10 @@ route_edit:
     pattern: /route/{route_id}/edit
     defaults: { _controller: DTLTrainerBundle:Route:edit }
 
+route_delete:
+    pattern: /route/{route_id}/delete
+    defaults: { _controller: DTLTrainerBundle:Route:delete }
+
 route_view:
     pattern: /route/{route_id}
     defaults: { _controller: DTLTrainerBundle:Route:view }

@@ -44,13 +44,14 @@ class FilterController extends Controller
             ->execute();
 
         $activeActivities = $this->getActiveFilters('activity');
-        $activeLabels = $this->getActiveFilters('label');
+        $activeLabels = $this->getActiveFilters('label_'.$type);
 
         return $this->render('DTLTrainerBundle:Filter:sidebar.html.twig', array(
             'labels' => $labels,
             'activities' => $activities,
             'activeActivities' => $activeActivities,
             'activeLabels' => $activeLabels,
+            'context' => $type,
         ));
     }
 

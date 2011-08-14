@@ -20,6 +20,7 @@ class SessionType extends AbstractType
         $builder->add('date', 'date');
         $builder->add('distance', 'distance');
         $builder->add('time', 'stopwatch');
+        $builder->add('labels', 'csv');
         $builder->add('log', 'textarea');
     }
 }

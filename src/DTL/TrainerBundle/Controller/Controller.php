@@ -72,13 +72,6 @@ class Controller extends BaseController
         $this->getPreferences()->burn();
     }
 
-    public function filterQb($qb)
-    {
-        if ($filters = $this->getActiveFilters('label')) {
-            $qb->field('labels')->in($filters);
-        }
-    }
-
     public function getPreferences()
     {
         return $this->container->get('dtl_trainer.user.preferences');

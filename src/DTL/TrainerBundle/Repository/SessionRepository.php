@@ -6,9 +6,13 @@ use DTL\TrainerBundle\Util\DocumentUtil;
 
 class SessionRepository extends DocumentRepository
 {
-    public function fetchRankedSessions($activities)
+    public function fetchRankedSessions($activities, $labels = array())
     {
         $qb = $this->createQueryBuilder();
+
+        if ($labels) {
+            $qb->field('labels')->in($labels);
+        }
 
         if ($activities) {
             $ids = array();
@@ -17,6 +21,7 @@ class SessionRepository extends DocumentRepository
             }
             $qb->field('activity.$id')->in($ids);
         }
+
         $sessions = $qb->getQuery()->execute()->toArray();
         DocumentUtil::rankSessions($sessions);
         $sessions = DocumentUtil::sortDocuments($sessions, 'getDateInSeconds');

@@ -18,7 +18,7 @@
         {% else %}
             {% set class="" %}
         {% endif %}
-       <a href="#" type="label" rel="{{ label._id }}" class="label button {{ class }}">{{ label._id }} x {{ label.value }}</a>
+       <a href="#" type="label_{{ context }}" rel="{{ label._id }}" class="label button {{ class }}">{{ label._id }} x {{ label.value }}</a>
     {% endfor %}
     </div>
 {% endif %}
