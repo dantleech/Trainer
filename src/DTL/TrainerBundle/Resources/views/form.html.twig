@@ -1,6 +1,0 @@
-{% block field_widget %}
-    {% spaceless %}
-        {% set type = type|default('text') %}
-        <input id="{{ id }}" type="{{ type }}" {{ block('attributes') }} class="text {% if errors %}inavlid{% endif %}" name="{{ full_name }}" value="{{ value }}" />
-    {% endspaceless %}
-{% endblock %}

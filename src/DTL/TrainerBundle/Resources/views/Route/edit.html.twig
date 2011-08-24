@@ -1,9 +1,0 @@
-{% extends "DTLTrainerBundle:Route:layout.html.twig" %}
-{% block navigation2 %}
-    {{ parent() }}
-    <a class="button" href="{{ path('route_view', {'route_id': route.getId}) }}">View</a>
-{% endblock %}
-{% block page_content %}
-    {% include "DTLTrainerBundle:Route:_form.html.twig" %}
-    <a onclick="return confirm('{% trans %}Are you sure?{% endtrans %}')"class="button negative" href="{{ path('route_delete', {'route_id': route.getId }) }}">Delete</a>
-{% endblock %}
