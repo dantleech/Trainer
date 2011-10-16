@@ -4,6 +4,7 @@
 
 [twig]
     git=http://github.com/fabpot/Twig.git
+    version=origin/1.1.2
 
 [monolog]
     git=http://github.com/Seldaek/monolog.git
@@ -75,3 +76,7 @@
 [FOSUserBundle]
     git=https://github.com/FriendsOfSymfony/FOSUserBundle.git
     target=/bundles/FOS/UserBundle
+
+[TrainerBundle]
+    git=https://github.com/dantleech/TrainerBundle.git
+    target=../src/DTL/TrainerBundle
