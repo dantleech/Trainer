@@ -1,5 +1,0 @@
-{% extends "DTLTrainerBundle:Session:layout.html.twig" %}
-{% block page_content %}
-    {% include "DTLTrainerBundle:Session:_form.html.twig" %}
-    <a onclick="return confirm('{% trans %}Are you sure?{% endtrans %}')"class="button negative" href="{{ path('session_delete', {'session_id': session.getId }) }}">Delete</a>
-{% endblock %}
