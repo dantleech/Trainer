@@ -7,8 +7,7 @@
     version=origin/1.1.2
 
 [monolog]
-    git=http://github.com/Seldaek/monolog.git
-
+    git=http://github.com/Seldaek/monolog.git 
 [doctrine-common]
     git=http://github.com/doctrine/common.git
     version=origin/3.0.x
@@ -39,11 +38,6 @@
 [SensioDistributionBundle]
     git=http://github.com/sensio/SensioDistributionBundle.git
     target=/bundles/Sensio/Bundle/DistributionBundle
-
-
-[JMSSecurityExtraBundle]
-    git=http://github.com/schmittjoh/SecurityExtraBundle.git
-    target=/bundles/JMS/SecurityExtraBundle
 
 [WebConfiguratorBundle]
     git=http://github.com/symfony/WebConfiguratorBundle.git
