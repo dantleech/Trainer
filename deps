@@ -1,26 +1,29 @@
 [symfony]
     git=http://github.com/symfony/symfony.git
-    version=origin/2.0
 
 [twig]
     git=http://github.com/fabpot/Twig.git
-    version=origin/1.1.2
+    version=origin/master
 
 [monolog]
     git=http://github.com/Seldaek/monolog.git 
+    version=1.0.2
+
 [doctrine-common]
     git=http://github.com/doctrine/common.git
-    version=origin/3.0.x
+    version=origin/master
 
 [doctrine-dbal]
     git=http://github.com/doctrine/dbal.git
+    version=origin/master
 
 [doctrine]
     git=http://github.com/doctrine/doctrine2.git
+    version=origin/master
 
 [swiftmailer]
     git=http://github.com/swiftmailer/swiftmailer.git
-    version=origin/4.1
+    version=v4.1.4
 
 [assetic]
     git=http://github.com/kriswallsmith/assetic.git
@@ -47,8 +50,12 @@
     git=http://github.com/symfony/AsseticBundle.git
     target=/bundles/Symfony/Bundle/AsseticBundle
 
+[DoctrineBundle]
+    git=http://github.com/doctrine/DoctrineBundle.git
+    target=/bundles/Doctrine/Bundle/DoctrineBundle
+
 [DoctrineMongoDBBundle]
-    git=git://github.com/dantleech/DoctrineMongoDBBundle.git
+    git=git://github.com/doctrine/DoctrineMongoDBBundle.git
     target=/bundles/Symfony/Bundle/DoctrineMongoDBBundle
 
 [doctrine-mongodb-odm]
@@ -61,8 +68,8 @@
     git=http://github.com/doctrine/data-fixtures.git
 
 [DoctrineFixturesBundle]
-    git=http://github.com/symfony/DoctrineFixturesBundle.git
-    target=/bundles/Symfony/Bundle/DoctrineFixturesBundle
+    git=http://github.com/doctrine/DoctrineFixturesBundle.git
+    target=/bundles/Doctrine/Bundle/FixturesBundle
 
 [blueprint]
     git=http://github.com/joshuaclayton/blueprint-css.git
