@@ -70,9 +70,10 @@
 [DoctrineFixturesBundle]
     git=http://github.com/doctrine/DoctrineFixturesBundle.git
     target=/bundles/Doctrine/Bundle/FixturesBundle
+    version=origin/master
 
 [blueprint]
-    git=http://github.com/joshuaclayton/blueprint-css.git
+    git=https://github.com/joshuaclayton/blueprint-css.git
 
 [FOSUserBundle]
     git=https://github.com/FriendsOfSymfony/FOSUserBundle.git
