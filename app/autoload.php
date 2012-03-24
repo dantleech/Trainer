@@ -4,6 +4,7 @@ use Symfony\Component\ClassLoader\UniversalClassLoader;
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
     'Symfony'                       => array(__DIR__.'/../vendor/symfony/src', __DIR__.'/../vendor/bundles'),
+    'Mopa'                          => __DIR__.'/../vendor/bundles',
     'Sensio'                        => __DIR__.'/../vendor/bundles',
     'JMS'                           => __DIR__.'/../vendor/bundles',
     'FOS'                           => __DIR__.'/../vendor/bundles',

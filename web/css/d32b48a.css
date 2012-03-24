@@ -1,0 +1,55 @@
+body {
+    font-size: 1em;
+}
+
+table.form tr:nth-child(2n) td {
+    background-color: white;
+}
+
+table.form tr td {
+    vertical-align: top;
+}
+
+table.form tr {
+    text-align: right;
+}
+
+.label {
+    
+}
+
+a.active, button.active {
+  background-color:#336699;
+  color: white;
+}
+
+#navigation-2 a.button {
+    float: right;
+    margin-right: 0px;
+    margin-left: 0.5em;
+}
+
+a.label {
+    margin-top: 0px;
+}
+
+#title h2 {
+    margin-bottom: 0px;
+}
+
+#navigation-1, #navigation-2 {
+    text-align: right;
+}
+
+.log-content {
+    display: none;        /* required */
+    position: absolute;   /* required */
+    padding: 10px;
+    border: 1px solid black;
+    background-color: white;
+    width: 400px;
+    background-color: #aaffaa;
+    border-color: #66aa66;
+    border-width: 2px;
+    z-index: 5;
+}

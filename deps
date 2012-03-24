@@ -2,6 +2,10 @@
     git=http://github.com/symfony/symfony.git
     version=origin/2.0
 
+[twitter-bootstrap]
+    git=git://github.com/twitter/bootstrap.git
+    version=origin/v2.0.1
+
 [twig]
     git=http://github.com/fabpot/Twig.git
     version=origin/1.1.2
@@ -74,3 +78,7 @@
 [TrainerBundle]
     git=https://github.com/dantleech/TrainerBundle.git
     target=../src/DTL/TrainerBundle
+
+[MopaBootstrapBundle]
+    git=http://github.com/phiamo/MopaBootstrapBundle.git
+    target=/bundles/Mopa/BootstrapBundle
