@@ -1,5 +1,6 @@
 [symfony]
     git=http://github.com/symfony/symfony.git
+    version=origin/2.0
 
 [twitter-bootstrap]
     git=git://github.com/twitter/bootstrap.git
@@ -41,10 +42,17 @@
 [SensioFrameworkExtraBundle]
     git=http://github.com/sensio/SensioFrameworkExtraBundle.git
     target=/bundles/Sensio/Bundle/FrameworkExtraBundle
+    version=origin/2.0
+
+[SesnioGeneratorMotherFuckerBundle]
+    git=git://github.com/sensio/SensioGeneratorBundle.git
+    target=/bundles/Sensio/Bundle/GeneratorBundle
+    version=2.0
 
 [SensioDistributionBundle]
     git=http://github.com/sensio/SensioDistributionBundle.git
     target=/bundles/Sensio/Bundle/DistributionBundle
+    version=origin/1.0
 
 [WebConfiguratorBundle]
     git=http://github.com/symfony/WebConfiguratorBundle.git
@@ -61,6 +69,7 @@
 [DoctrineMongoDBBundle]
     git=git://github.com/doctrine/DoctrineMongoDBBundle.git
     target=/bundles/Symfony/Bundle/DoctrineMongoDBBundle
+    version=origin/2.0
 
 [doctrine-mongodb-odm]
     git=git://github.com/doctrine/mongodb-odm.git
@@ -90,3 +99,4 @@
 [MopaBootstrapBundle]
     git=http://github.com/phiamo/MopaBootstrapBundle.git
     target=/bundles/Mopa/BootstrapBundle
+    version=origin/v2.x_sf2.0
