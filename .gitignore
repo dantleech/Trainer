@@ -5,3 +5,4 @@ web/bundles/*
 vendor/*
 *.cache
 *.swp
+composer.phar

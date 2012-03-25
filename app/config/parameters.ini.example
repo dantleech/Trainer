@@ -16,3 +16,5 @@
     locale            = en
 
     secret            = ThisTokenIsNotSoSecretChangeIt
+
+    admin_pass        = admin
