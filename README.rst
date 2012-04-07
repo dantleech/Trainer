@@ -1,7 +1,7 @@
 Mongo Trainer
 =============
 
-Mongo Trainer is a sports training application that::
+Mongo Trainer is a sports training application that:
 
 * Logs either timed sessions or distance sessions
 * Logs for any number  sports (e.g. Running, Swimming, Bike)
@@ -14,3 +14,5 @@ Mongo Trainer is a sports training application that::
 * Provides inline trend graphs when listing routes.
 * Supports both Miles and Kilometeres
 * Weight logging
+
+It is runs on Symfony2 with MongoDB and Twitter Bootstrap.
