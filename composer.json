@@ -14,7 +14,9 @@
         "symfony/swiftmailer-bundle": "dev-master",
         "symfony/monolog-bundle": "dev-master",
         "sensio/distribution-bundle": "dev-master",
-        "dantleech/trainer-bundle": "dev-master"
+        "dantleech/trainer-bundle": "dev-master",
+        "friendsofsymfony/user-bundle": "dev-master",
+        "symfony/swiftmailer-bundle": "dev-master"
     },
     "repositories": [
         {

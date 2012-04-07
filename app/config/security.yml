@@ -8,10 +8,8 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        memory:
-            memory:
-                users:
-                    admin: { password: %admin_pass%, roles: ROLE_SUPER_ADMIN }
+        fos_userbundle:
+            id: fos_user.user_manager
 
     firewalls:
         profiler:
@@ -31,6 +29,7 @@ security:
             anonymous: ~
             http_basic:
                 realm: "Trainer"
+                provider: fos_userbundle
 
     access_control:
         - { path: ^/, roles: ROLE_USER }

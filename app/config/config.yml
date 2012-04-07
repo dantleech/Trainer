@@ -33,3 +33,10 @@ doctrine_mongodb:
 
 dtl_trainer:
     title: Dans Fucking Training App
+
+fos_user:
+    db_driver:     mongodb
+    firewall_name: secured_area
+    user_class:  DTL\TrainerBundle\Document\User
+
+
