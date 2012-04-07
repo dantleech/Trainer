@@ -30,6 +30,18 @@
                     "reference": "master"
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+                "version": "master",
+                "name": "datatables/datatables",
+                "source": {
+                    "url": "https://github.com/DataTables/DataTables.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
         }
     ],
     "scripts": {
