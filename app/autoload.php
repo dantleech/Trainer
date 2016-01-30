@@ -1,6 +1,6 @@
 <?php
 
-if (!$loader = include __DIR__.'/../vendor/.composer/autoload.php') {
+if (!$loader = include __DIR__.'/../vendor/autoload.php') {
     $nl = PHP_SAPI === 'cli' ? PHP_EOL : '<br />';
     echo "$nl$nl";
     if (is_writable(dirname(__DIR__)) && $installer = @file_get_contents('http://getcomposer.org/installer')) {
@@ -19,6 +19,7 @@ if (!$loader = include __DIR__.'/../vendor/.composer/autoload.php') {
 }
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Doctrine\ODM\MongoDB\Mapping\Driver\AnnotationDriver;
 
 // intl
 if (!function_exists('intl_get_error_code')) {
@@ -28,7 +29,6 @@ if (!function_exists('intl_get_error_code')) {
 }
 
 AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
+AnnotationDriver::registerAnnotationClasses();
 
-AnnotationRegistry::registerFile(
-    __DIR__.'/../vendor/doctrine/mongodb-odm/lib/Doctrine/ODM/MongoDB/Mapping/Annotations/DoctrineAnnotations.php'
-);
+return $loader;
