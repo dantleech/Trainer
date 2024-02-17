@@ -41,6 +41,8 @@ doctrine_mongodb:
             database:       trainer
     connections:
         default:
+            server: mongodb://mongodb:27017
+            options: {}
 
 dtl_trainer:
     title: Dans Fucking Training App

@@ -7,7 +7,7 @@ services:
     ports:
       - '8080:8080'
   mongodb:
-    image: mongo:2.7.5
+    image: mongo:3.6
     ports:
       - '27017:27017'
     volumes:
