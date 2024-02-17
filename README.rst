@@ -1,6 +1,8 @@
 Mongo Trainer
 =============
 
+LEGACY PROJECT: this project is now an historical personal project.
+
 Mongo Trainer is a sports training application that:
 
 * Logs either timed sessions or distance sessions
