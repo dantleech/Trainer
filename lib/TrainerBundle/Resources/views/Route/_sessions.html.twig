@@ -1,0 +1,48 @@
+<table id="sessions" class="table table-striped">
+    <thead>
+        <tr>
+            <th>{% trans %}Date{% endtrans %}</th>
+            <th>
+                {{ route.getRankedBy|trans() }}
+            </th>
+            <th class="small">MP{{ user_preference.get('distanceUnit')|upper }}</th>
+            <th class="small">{{ user_preference.get('distanceUnit')|upper }}PH</th>
+            <th>{% trans %}Rank{% endtrans %}</th>
+            <th>{% trans %}Log{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for session in route.getSessions %}
+        <tr id="session_{{ session.getId }}">
+            <td>
+                <a href="{{ path("session_view", {'session_id': session.getId}) }}">{{ session.getDate().format('Y-m-d') }}<br/></a>
+                {{ time_ago_in_words(session.getDate().format('U')) }}
+            </td>
+            <td>
+                {{ format_measure(route.getSessionMeasure(session), route.getRankedBy) }}
+            </td>
+            <td>
+                {{ format_average_pace(session.getTime, session.getDistance) }}
+            </td>
+            <td>
+                {{ format_meters(session.getAverageSpeed) }}
+            </td>
+            <td>
+                {{ session.getRank }}
+            </td>
+            <td>
+                {% if session.getLog %}
+                    {% include "DTLTrainerBundle:Session:_log.html.twig" with {'log': session.getLog} %}
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sessions').tablesorter();
+        $('.log').popover();
+    });
+</script>

@@ -1,0 +1,79 @@
+homepage:
+    path: /
+    defaults: { _controller: DTLTrainerBundle:Session:index, _format: html }
+
+session_new:
+    path: /session/new
+    defaults: { _controller: DTLTrainerBundle:Session:new }
+
+sessions:
+    path: /sessions
+    defaults: { _controller: DTLTrainerBundle:Session:index, _format: html }
+
+sessions_rss:
+    path: /sessions/rss
+    defaults: { _controller: DTLTrainerBundle:Session:index, _format: rss }
+
+session_edit:
+    path: /session/{session_id}/edit
+    defaults: { _controller: DTLTrainerBundle:Session:edit }
+
+session_view:
+    path: /session/{session_id}
+    defaults: { _controller: DTLTrainerBundle:Session:view }
+
+session_delete:
+    path: /session/{session_id}/delete
+    defaults: { _controller: DTLTrainerBundle:Session:delete }
+
+routes:
+    path: /routes
+    defaults: { _controller: DTLTrainerBundle:Route:index }
+
+route_new:
+    path: /route/new
+    defaults: { _controller: DTLTrainerBundle:Route:new }
+
+route_edit:
+    path: /route/{route_id}/edit
+    defaults: { _controller: DTLTrainerBundle:Route:edit }
+
+route_copy:
+    path: /route/{route_id}/copy
+    defaults: { _controller: DTLTrainerBundle:Route:copy }
+
+route_delete:
+    path: /route/{route_id}/delete
+    defaults: { _controller: DTLTrainerBundle:Route:delete }
+
+route_view:
+    path: /route/{route_id}
+    defaults: { _controller: DTLTrainerBundle:Route:view }
+
+route_new_session:
+    path: /route/{route_id}/session/new
+    defaults: { _controller: DTLTrainerBundle:Route:newSession }
+
+filter_update:
+    path: /filter/update
+    defaults: { _controller: DTLTrainerBundle:Filter:update }
+
+preferences:
+    path: /user/preferences
+    defaults: { _controller: DTLTrainerBundle:User:preferences }
+
+calendar_xml:
+    path: /calendar/xml
+    defaults: { _controller: DTLTrainerBundle:Calendar:index, _format: xml }
+
+calendar:
+    path: /calendar
+    defaults: { _controller: DTLTrainerBundle:Calendar:index }
+
+weight_index:
+    path: /weight
+    defaults: { _controller: DTLTrainerBundle:Weight:index }
+
+weight_delete:
+    path: /weight/{weight_id}/delete
+    defaults: { _controller: DTLTrainerBundle:Weight:delete }

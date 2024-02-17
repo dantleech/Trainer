@@ -1,0 +1,55 @@
+{% extends "DTLTrainerBundle:User:layout.html.twig" %}
+{% block page_content %}
+    <table class="table table-striped">
+    {% for key, value in preferences.getUser.getPreferences %}
+        <tr>
+            <th>{{ key }}</th>
+            <td>{{ value|json_encode }}</td>
+            <td>
+                <form method="post" action="{{ path('preferences') }}">
+                <input type="submit" class="btn btn-danger" value="{% trans %}Delete{% endtrans %}" name="delete[{{ key }}]"/>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    <form method="post" action="{{ path('preferences') }}">
+    <div class="update">
+        <fieldset>
+            <legend>{% trans %}Update{% endtrans %}</legend>
+            <label>{% trans %}Key{% endtrans %}</label><input type="text" name="key"/>
+            <label>{% trans %}Value{% endtrans %}</label><input type="text" name="value"/>
+        </fieldset>
+        <input class="btn btn-success" type="submit" value="Update" name="update"/>
+    </div>
+    </form>
+    <table class="table">
+        <label>Configuration keys</label>
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>siteTitle</td>
+                <td>Title of site</th>
+            </tr>
+            <tr>
+                <td>distanceUnit</td>
+                <td>Unit to measure distances by either <strong>k</strong> for <i>kilometers</i> or <strong>m</strong> for <i>miles</i></td>
+            </tr>
+            <tr>
+                <td>filters</td>
+                <td>Which filters are used in lists. DO NOT TOUCH</td>
+            </tr>
+        </tbody>
+    </table>
+
+    </table>
+{% endblock %}
+{% block sidebar_right %}
+{% endblock %}
+
+

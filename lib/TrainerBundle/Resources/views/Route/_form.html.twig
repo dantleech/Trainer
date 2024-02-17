@@ -1,0 +1,117 @@
+<form class="form-horizontal" action="#" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+    {{ form_row(form.activity) }}
+    {{ form_row(form.measuredBy) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.description) }}
+    <div id="time_distance" class="form control-group">
+        <label class="control-label">Distance / Time</label>
+        <div></div>
+    </div>
+    {{ form_row(form.labels) }}
+    <div class="form-group">
+        <label class="col-sm-3 control-label" for="map">Map</label>
+        <div class="col-sm-9">
+            <div id="map" style="height: 500px;"></div>
+        </div>
+    </div>
+    {{ form_row(form._token) }}
+    {{ form_row(form.coords) }}
+    {{ form_row(form.zoom) }}
+    {{ form_row(form.center) }}
+    <button class="btn btn-info" type="submit" class="positive">{% trans %}Save{% endtrans %}</button>
+    <a href="{{ path("sessions") }}" class="btn">{% trans %}Cancel{% endtrans %}</a>
+</form>
+<div style="display: none">
+    <div id="distance_row">
+        <div class="form-group">
+            {{ form_label(form.distance) }}
+            {{ form_errors(form.distance) }}
+            <div class="col-sm-9">
+                {{ form_widget(form.distance) }}
+            </div>
+        </div>
+    </div>
+    <div id="time_row">
+        <div class="form-group">
+            {{ form_label(form.time) }}</td>
+            {{ form_errors(form.time) }}
+            <div class="col-sm-9">
+            {{ form_widget(form.time) }}
+            </div>
+        </div>
+    </div>
+</div>
+</table>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#route_measuredBy').change(function() {
+            if (this.value == 'distance') {
+                $('#time_distance').empty().append($('#distance_row').clone().children());
+            }
+            if (this.value == 'time') {
+                $('#time_distance').empty().append($('#time_row').clone().children());
+            }
+        });
+
+        $('#route_measuredBy').change();
+
+        {% include "DTLTrainerBundle:Route:_map.html.twig" %}
+
+        // Initialise the draw control and pass it the FeatureGroup of editable layers
+        var drawControl = new L.Control.Draw({
+            draw: {
+                polygon: false,
+                marker: false,
+                circle: false,
+                rectangle: false
+            },
+            edit: {
+                featureGroup: drawnItems
+            }
+        });
+
+        updateCoords = function (layer) {
+            var shape = layer.toGeoJSON()
+            var coords = JSON.stringify(shape);
+            $('#route_coords').val(coords);
+
+            var tempLatLng = null;
+            var totalDistance = 0.00;
+            $.each(layer._latlngs, function(i, latlng){
+                if(tempLatLng == null){
+                    tempLatLng = latlng;
+                    return;
+                }
+
+                totalDistance += tempLatLng.distanceTo(latlng);
+                tempLatLng = latlng;
+            });
+
+            $('#route_distance').val((totalDistance / 1000).toFixed(2));
+        }
+
+        map.on('draw:created', function (e) {
+            updateCoords(e.layer);
+            map.addLayer(e.layer);
+        });
+
+        map.on('draw:edited', function (e) {
+            e.layers.eachLayer(function (layer) {
+                updateCoords(layer);
+            });
+        });
+
+        map.on('moveend', function (e) {
+            var latLng = map.getCenter()
+            $('#route_center').val(JSON.stringify([latLng.lat, latLng.lng]));
+        });
+
+        map.on('zoomend', function (e) {
+            $('#route_zoom').val(map.getZoom());
+        });
+
+        map.addControl(drawControl);
+    });
+
+</script>

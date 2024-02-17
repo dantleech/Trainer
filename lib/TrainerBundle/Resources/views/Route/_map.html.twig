@@ -1,0 +1,29 @@
+        var center = [51.505, -0.9];
+        var zoom = 13;
+        {% if route.center %}
+            center = {{ route.center | raw }};
+        {% endif %}
+        {% if route.zoom %}
+            zoom = {{ route.zoom }};
+        {% endif %}
+
+        var map = L.map('map').setView(center, zoom);
+        L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            maxZoom: 18,
+        }).addTo(map);
+
+        // Initialise the FeatureGroup to store editable layers
+        var drawnItems = new L.FeatureGroup();
+
+        {% if route.getCoords %}
+            var geoJson = jQuery.parseJSON('{{ route.getCoords | raw }}');
+            var route = L.geoJson(geoJson, {
+                onEachFeature: function (feature, layer) {
+                    drawnItems.addLayer(layer);
+                }
+            });
+            drawnItems.addLayer(route);
+        {% endif %}
+
+        map.addLayer(drawnItems);

@@ -1,0 +1,8 @@
+{% extends "DTLTrainerBundle::layout.html.twig" %}
+{% block page_title %}{% trans %}Sessions{% endtrans %}{% endblock %}
+{% block navigation2 %}            
+    <li><a class="btn" href="{{ path('sessions') }}">Index</a></li>
+    <li><a class="btn" href="{{ path('session_new') }}">New</a></li>
+{% endblock %}
+{% block page_content %}
+{% endblock %}

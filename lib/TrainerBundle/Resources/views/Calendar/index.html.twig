@@ -1,0 +1,35 @@
+{% set calYear = calendar.getDate.format('Y') %}
+{% set calMonth = calendar.getDate.format('n') %}
+{% extends "DTLTrainerBundle::layout.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset("bundles/dtltrainer/css/calendar.css") }}" type="text/css" media="screen, projection">
+{% endblock %}
+
+
+{% block page_content %}
+    <h2>{{ calendar.getCurrentMonth.getStartDate().format('F, Y') }}</h2>
+    <div id="years">
+        {% set currentYear = calendar.getCurrentDate().format('Y') %}
+        {% for i in 8..0 %}
+            {% set yearNo = currentYear - i %}
+            {% if calYear == yearNo %}
+                {{ yearNo }}
+            {% else %}
+                <a href="{{ path('calendar') }}?date={{ yearNo }}-{{ calMonth }}">{{ yearNo }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div id="months">
+        {% set months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] %}
+        {% for i, month in months %}
+            {% set monthNo = i + 1 %}
+            {% if calendar.getDate.format('n') == monthNo %}
+                {{ month }}
+            {% else %}
+                <a href="{{ path('calendar') }}?date={{ calYear }}-{{ monthNo }}">{{ month }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% include "DTLTrainerBundle:Calendar:_calendar.html.twig" %}
+{% endblock %}

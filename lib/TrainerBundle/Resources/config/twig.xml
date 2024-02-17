@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="dtl_trainer.twig.extension" class="DTL\TrainerBundle\Twig\Extension\TrainerExtension">
+            <tag name="twig.extension"/>
+            <argument type="service" id="dtl_trainer.user.preferences"/>
+        </service>
+    </services>
+</container>

@@ -1,0 +1,8 @@
+{% extends "DTLTrainerBundle::layout.html.twig" %}
+{% block page_title %}{% trans %}Routes{% endtrans %}{% endblock %}
+{% block navigation2 %}            
+    <li><a class="btn btn-default" href="{{ path('routes') }}">Index</a></li>
+    <li><a class="btn btn-default" href="{{ path('route_new') }}">New</a></li>
+{% endblock %}
+{% block page_content %}
+{% endblock %}

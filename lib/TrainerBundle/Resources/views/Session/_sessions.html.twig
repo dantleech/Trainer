@@ -1,0 +1,52 @@
+<table id="sessions" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Activity</th>
+            <th>Title</th>
+            <th>{{ user_preference.get('distanceUnit')|upper }}'s</th>
+            <th>Time</th>
+            <th>MP{{ user_preference.get('distanceUnit')|upper }}</th>
+            <th>{{ user_preference.get('distanceUnit')|upper }}PH</th>
+            <th>Rank</th>
+            <th>Log</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for session in sessions %}
+        <tr>
+            <td>
+                {{ session.getDate.format('Y-m-d') }}<br/>
+                {{ time_ago_in_words(session.getDate.format('U')) }}
+            </td>
+            <td>{{ session.getActivity }}</td>
+            <td>
+                <a href="{{ path("session_view", {'session_id': session.getId}) }}">{{ session.getTitle }}</a>
+            </td>
+            <td>{{ format_meters(session.getDistance) }}</td>
+            <td>{{ format_seconds(session.getTime, 'stopwatch') }}</td>
+            <td>{{ format_average_pace(session.getTime, session.getDistance) }}</td>
+            <td>{{ format_average_speed(session.getTime, session.getDistance) }}</td>
+            <td>{{ session.getRank }}
+            <td>
+                {% if session.getLog %}
+                    {% include "DTLTrainerBundle:Session:_log.html.twig" with {'log': session.getLog} %}
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sessions').tablesorter({
+            headers: {
+                0: {
+                    sorter: 'date_with_words',
+                }
+            }
+        });
+        $('.log').popover();
+    });
+</script>

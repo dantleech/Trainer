@@ -1,0 +1,63 @@
+{% extends "DTLTrainerBundle:Route:layout.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block navigation2 %}
+    {{ parent() }}
+    <li>
+        <a class="btn btn-default" href="{{ path('route_edit', {'route_id': route.getId}) }}">{% trans %}Edit{% endtrans %}</a>
+    </li>
+    <li>
+        <a class="btn btn-default" href="{{ path('route_copy', {'route_id': route.getId}) }}">Copy</a>
+    </li>
+    <li>
+    <a class="btn btn-default" href="#new_session">{% trans %}New Session{% endtrans %}</a>
+    </li>
+{% endblock %}
+{% block page %}
+<div>
+<h2>{{ route.title }}</h2>
+{% if route.getDescription %}
+    <p>{{ route.getDescription }}</p>
+{% endif %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>{% trans %}Activity{% endtrans %}</th>
+            <th>{{ route.measuredBy }}</th>
+            <th>{% trans %}Sessions{% endtrans %}</th>
+            <th>{% trans %}Labels{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ route.getActivity.getTitle }}</td>
+            <td>{{ format_measure(route.getMeasure, route.getMeasuredBy) }}</td>
+            <td>{{ route.getSessions|length }}</td>
+            <td>{{ route.getLabels|join(',') }}</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h3>{% trans %}Sessions{% endtrans %}</h3>
+        {% include "DTLTrainerBundle:Route:_sessions.html.twig" with {'sessions': route.getSessions()} %}
+    </div>
+    <div class="col-md-6">
+        <h3>{% trans %}Performance{% endtrans %}</h3>
+        {% include "DTLTrainerBundle:Route:_performanceTimeGraph.html.twig" with {'route': route} %}
+        <h3>Map</h3>
+        <div id="map" style="height: 400px;">
+        </div>
+        <h3 id="new_session">{% trans %}New Session{% endtrans %}</h3>
+        {% include "DTLTrainerBundle:Route:_formNewSession.html.twig" with {'form': form, 'route': route} %}
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        {% include "DTLTrainerBundle:Route:_map.html.twig" %}
+    });
+</script>
+{% endblock %}

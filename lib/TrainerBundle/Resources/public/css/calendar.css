@@ -1,0 +1,37 @@
+table.calendar {
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+
+table.calendar tbody td, table.calendar thead th {
+    vertical-align: top;
+    border-style: solid;
+    border-width: 1px;
+    width: 100px;
+    height: 50px;
+}
+
+table.calendar tbody td.dayInMonth {
+    background-color: #ddffdd;
+}
+
+table.calendar tbody td {
+    background-color: #dddddd;
+    font-size: 12px;
+}
+
+table.calendar tbody td .activity {
+    font-size: 10px;
+    color: green;
+}
+
+table.calendar tbody td.total {
+    background-color: #aaffaa;
+    font-weight: bold;
+}
+
+table.calendar thead th.total {
+    background-color: #88cc88;
+}
+

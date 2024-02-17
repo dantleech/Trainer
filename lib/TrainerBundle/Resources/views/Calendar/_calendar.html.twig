@@ -1,0 +1,43 @@
+<table class="calendar">
+<thead>
+    <tr>
+        {% for day in ['Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat', 'Sun'] %}
+            <th>{{ day }}</th>
+        {% endfor %}
+        <th class="total">Totals</th>
+    </tr>
+</thead>
+<tbody>
+{% set month = calendar.getCurrentMonth() %}
+{% for week in month.getWeeks() %}
+    <tr>
+        {% for day in week.getDays %}
+        <td class="{% if day.isInMonth %}dayInMonth{% endif %}">
+            {{ day.getDate().format('d') }}<br/>
+            {% for event in day.getEvents() %}
+                <span class="activity">{{ event.getActivity }}:</span><a class="log" data-content="{{ event.log }}" data-original-title="{{ event.title }}" href="{{ path('session_view', {'session_id': event.getId}) }}">{{ format_meters(event.getDistance()) }}{{ user_preference.get('distanceUnit') }}</a><br/>
+            {% endfor %}
+        </td>
+        {% endfor %}
+        <td class="total">
+            {% for activity in week.getActivities %}
+                <span class="activity">{{ activity }}</span> {{ format_meters(week.getXPath().evaluate("sum(.//Event[@activity='" ~ activity ~ "']/@distance)")) }}{{ user_preference.get('distanceUnit') }}<br/>
+            {% endfor %}
+        </td>
+    </tr>
+{% endfor %}
+</tbody>
+<tfoot>
+    <td colspan="7"></td>
+    <td class="total">
+        {% for activity in month.getActivities %}
+            <span class="activity">{{ activity }}</span> {{ format_meters(month.getXPath().evaluate("sum(.//Event[@activity='" ~ activity ~ "']/@distance)")) }}{{ user_preference.get('distanceUnit') }}<br/>
+        {% endfor %}
+    </td>
+</tfoot>
+</table>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.log').popover();
+    });
+</script>

@@ -1,0 +1,86 @@
+{% extends "::base.html.twig" %}
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset("js/jquery-1.7.2.min.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/jquery.sparkline.min.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/jquery.tablesorter.min.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/bootstrap-tooltip.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/bootstrap-popover.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/flot/jquery.flot.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/flot/jquery.flot.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/leaflet/leaflet.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/leaflet/draw.js") }}"></script>
+{% endblock %}
+{% block stylesheets %}
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{ asset('js/flot/excanvas.js') }}"></script><![endif]-->
+    <link rel="stylesheet" href="{{ asset("bundles/mopabootstrap/bootstrap/dist/css/bootstrap.css") }}" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="{{ asset("js/leaflet/leaflet.css") }}" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="{{ asset("js/leaflet/draw.css") }}" type="text/css" media="screen, projection">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+      section {
+        padding-top: 20px;
+      }
+    </style>
+{% endblock %}
+{% block body %}
+    <!-- Add tablesorter parser to parse date column with words !-->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.tablesorter.addParser({
+                id: 'date_with_words',
+                is: function (s) {
+                    return false;
+                },
+                format: function (s) {
+                    var s = $.trim(s).substr(0,10).replace(/-/g, '');
+                    return s;
+                },
+                type: 'numeric',
+            });
+        });
+    </script>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{ path('homepage') }}">Mongo Trainer</a>
+                <ul class="nav navbar-nav">
+                    <li><a class="active" href="{{ path('sessions') }}">{% trans %}Sessions{% endtrans %}</a></li>
+                    <li><a href="{{ path('routes') }}">{% trans %}Routes{% endtrans %}</a></li>
+                    <li><a href="{{ path('calendar') }}">{% trans %}Calendar{% endtrans %}</a></li>
+                    <li><a href="{{ path('preferences') }}">{% trans %}Preferences{% endtrans %}</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <header id="overview">
+            <h2>{% block page_title %}{% endblock %}</h2>
+            <div class="subnav subnav-fixed">
+                <ul class="nav nav-pills">
+                    {% block navigation2 %}
+                    {% endblock %}
+                </ul>
+            </div>
+        </header>
+        {% if app.session.getFlashBag.has('success') %}
+            <div class="alert alert-success">
+                {% for message in app.session.getFlashBag.get('success') %}{{ message }}{% endfor %}
+            </div>
+        {% endif %}
+        {% block page %}
+            <div class="row">
+            <div class="col-md-9">
+                {% block page_content %}
+                {% endblock %}
+            </div>
+
+            <div class="col-md-3">
+                {% block sidebar_right %}
+                {% endblock %}
+            </div>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

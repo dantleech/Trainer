@@ -1,0 +1,6 @@
+<form class="form-horizontal well" action="#" method="post" {{ form_enctype(form) }}>
+    {{ form_row(form.date.date) }}
+    {{ form_row(form.date.time) }}
+    {{ form_rest(form) }}
+    <button type="submit" class="btn btn-success">{% trans %}Save{% endtrans %}</button>
+</form>
