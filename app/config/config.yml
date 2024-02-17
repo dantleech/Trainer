@@ -29,10 +29,10 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
-    form:
-        resources:
-            - 'MopaBootstrapBundle:Form:fields.html.twig'
-            - 'DTLTrainerBundle::form.html.twig'
+      #form:
+      #    resources:
+      #        - 'MopaBootstrapBundle:Form:fields.html.twig'
+      #        - 'DTLTrainerBundle::form.html.twig'
 
 doctrine_mongodb:
     document_managers:
@@ -46,6 +46,9 @@ dtl_trainer:
     title: Dans Fucking Training App
 
 fos_user:
+    from_email:
+        address: dan@example.com
+        sender_name: dan
     db_driver:     mongodb
     firewall_name: secured_area
     user_class:  DTL\TrainerBundle\Document\User

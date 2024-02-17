@@ -1,0 +1,15 @@
+services:
+  php:
+    build:
+      context: docker/php
+    volumes:
+      - .:/app
+    ports:
+      - '8080:8080'
+  mongodb:
+    image: mongo:2.7.5
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./data:/data/db
+      - .:/app

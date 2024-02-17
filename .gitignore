@@ -1,3 +1,6 @@
+var/*
+data/
+lib/
 app/logs/*
 app/cache/*
 web/uploads/*
