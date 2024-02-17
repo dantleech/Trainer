@@ -3,5 +3,5 @@
     {% include "DTLTrainerBundle:Route:_routes.html.twig" %}
 {% endblock %}
 {% block sidebar_right %}
-    {% render(controller("DTLTrainerBundle:Filter:sidebar", {'type': 'route'})) %}
+    {{ render(controller("DTLTrainerBundle:Filter:sidebar", {'type': 'route'})) }}
 {% endblock %}

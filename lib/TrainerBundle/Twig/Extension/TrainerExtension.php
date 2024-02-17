@@ -8,9 +8,10 @@ use FOS\UserBundle\Model\UserManager;
 use DTL\TrainerBundle\User\Preferences;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
+use Twig\Extension\GlobalsInterface;
 use Twig\TwigFunction;
 
-class TrainerExtension extends AbstractExtension
+class TrainerExtension extends AbstractExtension implements GlobalsInterface
 {
     protected $preferences;
 
@@ -19,9 +20,11 @@ class TrainerExtension extends AbstractExtension
         $this->preferences = $preferences;
     }
 
-    public function initRuntime(Environment $env)
+    public function getGlobals()
     {
-        $env->addGlobal('user_preference', $this->preferences);
+        return [
+            'user_preference' => $this->preferences
+        ];
     }
 
     public function getFunctions()

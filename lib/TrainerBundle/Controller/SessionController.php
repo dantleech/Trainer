@@ -14,6 +14,7 @@ namespace DTL\TrainerBundle\Controller;
 use DTL\TrainerBundle\Document\Session;
 use DTL\TrainerBundle\Form\SessionType;
 use DTL\TrainerBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class SessionController extends Controller
 {
@@ -22,13 +23,13 @@ class SessionController extends Controller
         return $this->getDocumentFromRequest('DTLTrainerBundle:Session', 'session_id');
     }
 
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $rep = $this->getDm()->getRepository('DTLTrainerBundle:Session');
         $sessions = $rep->fetchRankedSessions($this->getActiveFilters('activity'), $this->getActiveFilters('label_session'));
-        $format = $this->get('request')->get('_format');
+        $format = $request->query->get('_format') ?: 'html';
 
-        return $this->render('DTLTrainerBundle:Session:index.'.$format.'.twig', array(
+        return $this->render('@DTLTrainer/Session/index.'.$format.'.twig', array(
             'sessions' => $sessions
         ));
     }

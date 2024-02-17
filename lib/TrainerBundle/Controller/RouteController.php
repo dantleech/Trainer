@@ -15,12 +15,13 @@ use DTL\TrainerBundle\Controller\Controller;
 use DTL\TrainerBundle\Document\Route;
 use DTL\TrainerBundle\Form\RouteType;
 use DTL\TrainerBundle\Form\RouteSessionType;
+use Symfony\Component\HttpFoundation\Request;
 
 class RouteController extends Controller
 {
-    protected function getRoute()
+    protected function getRoute(Request $request)
     {
-        return $this->getDocumentFromRequest('DTLTrainerBundle:Route', 'route_id');
+        return $this->getDocumentFromRequest($request, 'DTLTrainerBundle:Route', 'route_id');
     }
 
     public function indexAction()

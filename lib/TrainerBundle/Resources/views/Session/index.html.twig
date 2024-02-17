@@ -3,6 +3,6 @@
     {% include "DTLTrainerBundle:Session:_sessions.html.twig" %}
 {% endblock %}
 {% block sidebar_right %}
-    {% render(controller("DTLTrainerBundle:Filter:sidebar")) %}
+    {{ render(controller("DTLTrainerBundle:Filter:sidebar")) }}
 {% endblock %}
 

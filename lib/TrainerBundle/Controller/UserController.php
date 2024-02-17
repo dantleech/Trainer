@@ -11,21 +11,22 @@
 
 namespace DTL\TrainerBundle\Controller;
 use DTL\TrainerBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends Controller
 {
-    public function preferencesAction()
+    public function preferencesAction(Request $request)
     {
-        if ($delete = $this->get('request')->get('delete')) {
+        if ($delete = $request->get('delete')) {
             $this->getPreferences()->remove(key($delete));
             $this->getPreferences()->burn();
             $this->notifySuccess(sprintf('Config key "%s" removed.', key($delete)));
             return $this->redirect($this->generateUrl('preferences'));
         }
 
-        if ($update = $this->get('request')->get('update')) {
-            $key = $this->get('request')->get('key');
-            $value = $this->get('request')->get('value');
+        if ($update = $request->get('update')) {
+            $key = $request->get('key');
+            $value = $request->get('value');
             $this->getPreferences()->set($key, $value);
             $this->getPreferences()->burn();
             $this->notifySuccess(sprintf('Config key "%s" updated.', $key));

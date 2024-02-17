@@ -3,6 +3,7 @@
 namespace DTL\TrainerBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
 use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Request;
 
 class Controller extends BaseController
 {
@@ -35,7 +36,7 @@ class Controller extends BaseController
 
     protected function processForm(Form $form)
     {
-        $request = $this->get('request');
+        $request = $this->getRequest();
         $dm = $this->getDm();
         if ($request->getMethod() == 'POST') {
             $form->submit($request);
@@ -50,9 +51,14 @@ class Controller extends BaseController
         return false;
     }
 
+    protected function getRequest(): Request
+    {
+        return $this->get('request_stack')->getMasterRequest();
+    }
+
     protected function getDocumentFromRequest($type, $idParam)
     {
-        if (!$id = $this->get('request')->get($idParam)) {
+        if (!$id = $this->getRequest()->get($idParam)) {
             throw new \Exception('No ID given in request');
         }
         $document = $this->getDm()->find($type, $id);
