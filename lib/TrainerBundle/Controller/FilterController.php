@@ -58,8 +58,8 @@ class FilterController extends Controller
 
     public function updateAction()
     {
-        $type = $this->get('request')->get('type');
-        $id = $this->get('request')->get('id');
+        $type = $this->getRequest()->get('type');
+        $id = $this->getRequest()->get('id');
         $this->filterToggle($type, $id);
 
         return new Response();

@@ -19,13 +19,13 @@ class CalendarController extends Controller
 {
     public function indexAction()
     {
-        if ($date = $this->get('request')->get('date')) {
+        if ($date = $this->getRequest()->get('date')) {
             $date = new \DateTime($date);
         } else {
             $date = new \DateTime;
         }
 
-        if ($month = $this->get('request')->get('month')) {
+        if ($month = $this->getRequest()->get('month')) {
             $date->modify('first day of january');
             $date->modify(($month - 1).' month');
         }
@@ -39,7 +39,7 @@ class CalendarController extends Controller
             );
         $calendar->addEvents($sessions);
 
-        $format = $this->get('request')->getRequestFormat();
+        $format = $this->getRequest()->getRequestFormat();
 
         if ($format == 'xml') {
             return new Response($month->getDOM()->saveXML()); //rray('Content-Type: text/xml'));

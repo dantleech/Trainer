@@ -3,6 +3,7 @@
 namespace DTL\TrainerBundle\Repository;
 use DTL\TrainerBundle\Util\DocumentUtil;
 use Doctrine\ODM\MongoDB\Repository\DocumentRepository;
+use MongoDB\BSON\ObjectId;
 
 class SessionRepository extends DocumentRepository
 {
@@ -17,7 +18,7 @@ class SessionRepository extends DocumentRepository
         if ($activities) {
             $ids = array();
             foreach ($activities as $activity) {
-                $ids[] = new \MongoId($activity);
+                $ids[] = new ObjectId($activity);
             }
             $qb->field('activity.$id')->in($ids);
         }
